@@ -76,7 +76,7 @@ type RewardTierProto struct {
 	MinPosition   int32                  `protobuf:"varint,1,opt,name=min_position,json=minPosition,proto3" json:"min_position,omitempty"`
 	MaxPosition   int32                  `protobuf:"varint,2,opt,name=max_position,json=maxPosition,proto3" json:"max_position,omitempty"`
 	Amount        float64                `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	Style         RewardStyle            `protobuf:"varint,4,opt,name=style,proto3,enum=rewards.v1.RewardStyle" json:"style,omitempty"`
+	Style         RewardStyle            `protobuf:"varint,4,opt,name=style,proto3,enum=reward.RewardStyle" json:"style,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -375,35 +375,34 @@ var File_reward_rewards_proto protoreflect.FileDescriptor
 
 const file_reward_rewards_proto_rawDesc = "" +
 	"\n" +
-	"\x14reward/rewards.proto\x12\n" +
-	"rewards.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9e\x01\n" +
+	"\x14reward/rewards.proto\x12\x06reward\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9a\x01\n" +
 	"\x0fRewardTierProto\x12!\n" +
 	"\fmin_position\x18\x01 \x01(\x05R\vminPosition\x12!\n" +
 	"\fmax_position\x18\x02 \x01(\x05R\vmaxPosition\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\x12-\n" +
-	"\x05style\x18\x04 \x01(\x0e2\x17.rewards.v1.RewardStyleR\x05style\";\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\x12)\n" +
+	"\x05style\x18\x04 \x01(\x0e2\x13.reward.RewardStyleR\x05style\";\n" +
 	"\x1cTriggerRewardCampaignRequest\x12\x1b\n" +
 	"\tconfig_id\x18\x01 \x01(\tR\bconfigId\"\x81\x01\n" +
 	"\x1dTriggerRewardCampaignResponse\x12\x1b\n" +
 	"\tconfig_id\x18\x01 \x01(\tR\bconfigId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12+\n" +
-	"\x11records_processed\x18\x03 \x01(\x05R\x10recordsProcessed\"\xd5\x01\n" +
+	"\x11records_processed\x18\x03 \x01(\x05R\x10recordsProcessed\"\xd1\x01\n" +
 	"\x13SyncCampaignRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12'\n" +
 	"\x0fgame_identifier\x18\x02 \x01(\tR\x0egameIdentifier\x12)\n" +
 	"\x10leaderboard_type\x18\x03 \x01(\tR\x0fleaderboardType\x12\x1a\n" +
-	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x121\n" +
-	"\x05tiers\x18\x05 \x03(\v2\x1b.rewards.v1.RewardTierProtoR\x05tiers\"M\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12-\n" +
+	"\x05tiers\x18\x05 \x03(\v2\x17.reward.RewardTierProtoR\x05tiers\"M\n" +
 	"\x14SyncCampaignResponse\x12\x1b\n" +
 	"\tconfig_id\x18\x01 \x01(\tR\bconfigId\x12\x18\n" +
 	"\asuccess\x18\x02 \x01(\bR\asuccess*\\\n" +
 	"\vRewardStyle\x12\x1c\n" +
 	"\x18REWARD_STYLE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12REWARD_STYLE_FIXED\x10\x01\x12\x17\n" +
-	"\x13REWARD_STYLE_SHARED\x10\x022\xde\x01\n" +
-	"\x0eRewardsService\x12l\n" +
-	"\x15TriggerRewardCampaign\x12(.rewards.v1.TriggerRewardCampaignRequest\x1a).rewards.v1.TriggerRewardCampaignResponse\x12^\n" +
-	"\x19SyncCampaignConfiguration\x12\x1f.rewards.v1.SyncCampaignRequest\x1a .rewards.v1.SyncCampaignResponseB8Z6github.com/touchvasgaming/proto-registry/gen/go/rewardb\x06proto3"
+	"\x13REWARD_STYLE_SHARED\x10\x022\xce\x01\n" +
+	"\x0eRewardsService\x12d\n" +
+	"\x15TriggerRewardCampaign\x12$.reward.TriggerRewardCampaignRequest\x1a%.reward.TriggerRewardCampaignResponse\x12V\n" +
+	"\x19SyncCampaignConfiguration\x12\x1b.reward.SyncCampaignRequest\x1a\x1c.reward.SyncCampaignResponseB8Z6github.com/touchvasgaming/proto-registry/gen/go/rewardb\x06proto3"
 
 var (
 	file_reward_rewards_proto_rawDescOnce sync.Once
@@ -420,20 +419,20 @@ func file_reward_rewards_proto_rawDescGZIP() []byte {
 var file_reward_rewards_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_reward_rewards_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_reward_rewards_proto_goTypes = []any{
-	(RewardStyle)(0),                      // 0: rewards.v1.RewardStyle
-	(*RewardTierProto)(nil),               // 1: rewards.v1.RewardTierProto
-	(*TriggerRewardCampaignRequest)(nil),  // 2: rewards.v1.TriggerRewardCampaignRequest
-	(*TriggerRewardCampaignResponse)(nil), // 3: rewards.v1.TriggerRewardCampaignResponse
-	(*SyncCampaignRequest)(nil),           // 4: rewards.v1.SyncCampaignRequest
-	(*SyncCampaignResponse)(nil),          // 5: rewards.v1.SyncCampaignResponse
+	(RewardStyle)(0),                      // 0: reward.RewardStyle
+	(*RewardTierProto)(nil),               // 1: reward.RewardTierProto
+	(*TriggerRewardCampaignRequest)(nil),  // 2: reward.TriggerRewardCampaignRequest
+	(*TriggerRewardCampaignResponse)(nil), // 3: reward.TriggerRewardCampaignResponse
+	(*SyncCampaignRequest)(nil),           // 4: reward.SyncCampaignRequest
+	(*SyncCampaignResponse)(nil),          // 5: reward.SyncCampaignResponse
 }
 var file_reward_rewards_proto_depIdxs = []int32{
-	0, // 0: rewards.v1.RewardTierProto.style:type_name -> rewards.v1.RewardStyle
-	1, // 1: rewards.v1.SyncCampaignRequest.tiers:type_name -> rewards.v1.RewardTierProto
-	2, // 2: rewards.v1.RewardsService.TriggerRewardCampaign:input_type -> rewards.v1.TriggerRewardCampaignRequest
-	4, // 3: rewards.v1.RewardsService.SyncCampaignConfiguration:input_type -> rewards.v1.SyncCampaignRequest
-	3, // 4: rewards.v1.RewardsService.TriggerRewardCampaign:output_type -> rewards.v1.TriggerRewardCampaignResponse
-	5, // 5: rewards.v1.RewardsService.SyncCampaignConfiguration:output_type -> rewards.v1.SyncCampaignResponse
+	0, // 0: reward.RewardTierProto.style:type_name -> reward.RewardStyle
+	1, // 1: reward.SyncCampaignRequest.tiers:type_name -> reward.RewardTierProto
+	2, // 2: reward.RewardsService.TriggerRewardCampaign:input_type -> reward.TriggerRewardCampaignRequest
+	4, // 3: reward.RewardsService.SyncCampaignConfiguration:input_type -> reward.SyncCampaignRequest
+	3, // 4: reward.RewardsService.TriggerRewardCampaign:output_type -> reward.TriggerRewardCampaignResponse
+	5, // 5: reward.RewardsService.SyncCampaignConfiguration:output_type -> reward.SyncCampaignResponse
 	4, // [4:6] is the sub-list for method output_type
 	2, // [2:4] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name

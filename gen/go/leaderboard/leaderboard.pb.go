@@ -219,7 +219,7 @@ type GetPlayerRankRequest struct {
 	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	LeaderboardId string                 `protobuf:"bytes,2,opt,name=leaderboard_id,json=leaderboardId,proto3" json:"leaderboard_id,omitempty"`
 	PlayerId      string                 `protobuf:"bytes,3,opt,name=player_id,json=playerId,proto3" json:"player_id,omitempty"`
-	Type          LeaderboardType        `protobuf:"varint,4,opt,name=type,proto3,enum=leaderboard.v1.LeaderboardType" json:"type,omitempty"`
+	Type          LeaderboardType        `protobuf:"varint,4,opt,name=type,proto3,enum=leaderboard.LeaderboardType" json:"type,omitempty"`
 	// For target week tracking, e.g., "2026_29". If empty, defaults to current.
 	TimeframeKey  string `protobuf:"bytes,5,opt,name=timeframe_key,json=timeframeKey,proto3" json:"timeframe_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -371,7 +371,7 @@ type GetLeaderboardRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	LeaderboardId string                 `protobuf:"bytes,2,opt,name=leaderboard_id,json=leaderboardId,proto3" json:"leaderboard_id,omitempty"`
-	Type          LeaderboardType        `protobuf:"varint,3,opt,name=type,proto3,enum=leaderboard.v1.LeaderboardType" json:"type,omitempty"`
+	Type          LeaderboardType        `protobuf:"varint,3,opt,name=type,proto3,enum=leaderboard.LeaderboardType" json:"type,omitempty"`
 	TimeframeKey  string                 `protobuf:"bytes,4,opt,name=timeframe_key,json=timeframeKey,proto3" json:"timeframe_key,omitempty"`
 	// Pagination
 	Offset        int32 `protobuf:"varint,5,opt,name=offset,proto3" json:"offset,omitempty"`
@@ -678,7 +678,7 @@ var File_leaderboard_leaderboard_proto protoreflect.FileDescriptor
 
 const file_leaderboard_leaderboard_proto_rawDesc = "" +
 	"\n" +
-	"\x1dleaderboard/leaderboard.proto\x12\x0eleaderboard.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x01\n" +
+	"\x1dleaderboard/leaderboard.proto\x12\vleaderboard\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x01\n" +
 	"\x10LeaderboardEntry\x12\x1b\n" +
 	"\tplayer_id\x18\x01 \x01(\tR\bplayerId\x12\x14\n" +
 	"\x05score\x18\x02 \x01(\x01R\x05score\x12\x12\n" +
@@ -690,12 +690,12 @@ const file_leaderboard_leaderboard_proto_rawDesc = "" +
 	"\x04rank\x18\x02 \x01(\x03R\x04rank\x12\x14\n" +
 	"\x05score\x18\x03 \x01(\x01R\x05score\x129\n" +
 	"\n" +
-	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xd1\x01\n" +
+	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xce\x01\n" +
 	"\x14GetPlayerRankRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12%\n" +
 	"\x0eleaderboard_id\x18\x02 \x01(\tR\rleaderboardId\x12\x1b\n" +
-	"\tplayer_id\x18\x03 \x01(\tR\bplayerId\x123\n" +
-	"\x04type\x18\x04 \x01(\x0e2\x1f.leaderboard.v1.LeaderboardTypeR\x04type\x12#\n" +
+	"\tplayer_id\x18\x03 \x01(\tR\bplayerId\x120\n" +
+	"\x04type\x18\x04 \x01(\x0e2\x1c.leaderboard.LeaderboardTypeR\x04type\x12#\n" +
 	"\rtimeframe_key\x18\x05 \x01(\tR\ftimeframeKey\"\xbe\x01\n" +
 	"\x15GetPlayerRankResponse\x12\x1b\n" +
 	"\tplayer_id\x18\x01 \x01(\tR\bplayerId\x12\x12\n" +
@@ -703,18 +703,18 @@ const file_leaderboard_leaderboard_proto_rawDesc = "" +
 	"\x05score\x18\x03 \x01(\x01R\x05score\x12\x1f\n" +
 	"\vis_eligible\x18\x04 \x01(\bR\n" +
 	"isEligible\x12=\n" +
-	"\flast_updated\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\"\xe3\x01\n" +
+	"\flast_updated\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\"\xe0\x01\n" +
 	"\x15GetLeaderboardRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12%\n" +
-	"\x0eleaderboard_id\x18\x02 \x01(\tR\rleaderboardId\x123\n" +
-	"\x04type\x18\x03 \x01(\x0e2\x1f.leaderboard.v1.LeaderboardTypeR\x04type\x12#\n" +
+	"\x0eleaderboard_id\x18\x02 \x01(\tR\rleaderboardId\x120\n" +
+	"\x04type\x18\x03 \x01(\x0e2\x1c.leaderboard.LeaderboardTypeR\x04type\x12#\n" +
 	"\rtimeframe_key\x18\x04 \x01(\tR\ftimeframeKey\x12\x16\n" +
 	"\x06offset\x18\x05 \x01(\x05R\x06offset\x12\x14\n" +
-	"\x05limit\x18\x06 \x01(\x05R\x05limit\"\xc7\x01\n" +
+	"\x05limit\x18\x06 \x01(\x05R\x05limit\"\xc4\x01\n" +
 	"\x16GetLeaderboardResponse\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12%\n" +
-	"\x0eleaderboard_id\x18\x02 \x01(\tR\rleaderboardId\x12:\n" +
-	"\aentries\x18\x03 \x03(\v2 .leaderboard.v1.LeaderboardEntryR\aentries\x12-\n" +
+	"\x0eleaderboard_id\x18\x02 \x01(\tR\rleaderboardId\x127\n" +
+	"\aentries\x18\x03 \x03(\v2\x1d.leaderboard.LeaderboardEntryR\aentries\x12-\n" +
 	"\x12total_participants\x18\x04 \x01(\x03R\x11totalParticipants\"\xe8\x01\n" +
 	"\x13StreamReportRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12%\n" +
@@ -722,14 +722,14 @@ const file_leaderboard_leaderboard_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1b\n" +
-	"\tmin_score\x18\x05 \x01(\x01R\bminScore\"\xd6\x02\n" +
+	"\tmin_score\x18\x05 \x01(\x01R\bminScore\"\xd3\x02\n" +
 	"\x11ReportRowResponse\x12\x1b\n" +
 	"\tplayer_id\x18\x01 \x01(\tR\bplayerId\x12\x1f\n" +
 	"\vfinal_score\x18\x02 \x01(\x01R\n" +
 	"finalScore\x128\n" +
 	"\x18total_events_contributed\x18\x03 \x01(\x03R\x16totalEventsContributed\x12?\n" +
-	"\rcalculated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fcalculatedAt\x12K\n" +
-	"\bmetadata\x18\x05 \x03(\v2/.leaderboard.v1.ReportRowResponse.MetadataEntryR\bmetadata\x1a;\n" +
+	"\rcalculated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fcalculatedAt\x12H\n" +
+	"\bmetadata\x18\x05 \x03(\v2,.leaderboard.ReportRowResponse.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01*\xa9\x01\n" +
@@ -738,11 +738,11 @@ const file_leaderboard_leaderboard_proto_rawDesc = "" +
 	"\x16LEADERBOARD_TYPE_DAILY\x10\x01\x12\x1b\n" +
 	"\x17LEADERBOARD_TYPE_WEEKLY\x10\x02\x12\x1c\n" +
 	"\x18LEADERBOARD_TYPE_MONTHLY\x10\x03\x12\x1d\n" +
-	"\x19LEADERBOARD_TYPE_ALL_TIME\x10\x042\xb8\x02\n" +
-	"\x12LeaderboardService\x12\\\n" +
-	"\rGetPlayerRank\x12$.leaderboard.v1.GetPlayerRankRequest\x1a%.leaderboard.v1.GetPlayerRankResponse\x12_\n" +
-	"\x0eGetLeaderboard\x12%.leaderboard.v1.GetLeaderboardRequest\x1a&.leaderboard.v1.GetLeaderboardResponse\x12c\n" +
-	"\x17StreamLeaderboardReport\x12#.leaderboard.v1.StreamReportRequest\x1a!.leaderboard.v1.ReportRowResponse0\x01B=Z;github.com/touchvasgaming/proto-registry/gen/go/leaderboardb\x06proto3"
+	"\x19LEADERBOARD_TYPE_ALL_TIME\x10\x042\xa6\x02\n" +
+	"\x12LeaderboardService\x12V\n" +
+	"\rGetPlayerRank\x12!.leaderboard.GetPlayerRankRequest\x1a\".leaderboard.GetPlayerRankResponse\x12Y\n" +
+	"\x0eGetLeaderboard\x12\".leaderboard.GetLeaderboardRequest\x1a#.leaderboard.GetLeaderboardResponse\x12]\n" +
+	"\x17StreamLeaderboardReport\x12 .leaderboard.StreamReportRequest\x1a\x1e.leaderboard.ReportRowResponse0\x01B=Z;github.com/touchvasgaming/proto-registry/gen/go/leaderboardb\x06proto3"
 
 var (
 	file_leaderboard_leaderboard_proto_rawDescOnce sync.Once
@@ -759,35 +759,35 @@ func file_leaderboard_leaderboard_proto_rawDescGZIP() []byte {
 var file_leaderboard_leaderboard_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_leaderboard_leaderboard_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_leaderboard_leaderboard_proto_goTypes = []any{
-	(LeaderboardType)(0),           // 0: leaderboard.v1.LeaderboardType
-	(*LeaderboardEntry)(nil),       // 1: leaderboard.v1.LeaderboardEntry
-	(*RankEntry)(nil),              // 2: leaderboard.v1.RankEntry
-	(*GetPlayerRankRequest)(nil),   // 3: leaderboard.v1.GetPlayerRankRequest
-	(*GetPlayerRankResponse)(nil),  // 4: leaderboard.v1.GetPlayerRankResponse
-	(*GetLeaderboardRequest)(nil),  // 5: leaderboard.v1.GetLeaderboardRequest
-	(*GetLeaderboardResponse)(nil), // 6: leaderboard.v1.GetLeaderboardResponse
-	(*StreamReportRequest)(nil),    // 7: leaderboard.v1.StreamReportRequest
-	(*ReportRowResponse)(nil),      // 8: leaderboard.v1.ReportRowResponse
-	nil,                            // 9: leaderboard.v1.ReportRowResponse.MetadataEntry
+	(LeaderboardType)(0),           // 0: leaderboard.LeaderboardType
+	(*LeaderboardEntry)(nil),       // 1: leaderboard.LeaderboardEntry
+	(*RankEntry)(nil),              // 2: leaderboard.RankEntry
+	(*GetPlayerRankRequest)(nil),   // 3: leaderboard.GetPlayerRankRequest
+	(*GetPlayerRankResponse)(nil),  // 4: leaderboard.GetPlayerRankResponse
+	(*GetLeaderboardRequest)(nil),  // 5: leaderboard.GetLeaderboardRequest
+	(*GetLeaderboardResponse)(nil), // 6: leaderboard.GetLeaderboardResponse
+	(*StreamReportRequest)(nil),    // 7: leaderboard.StreamReportRequest
+	(*ReportRowResponse)(nil),      // 8: leaderboard.ReportRowResponse
+	nil,                            // 9: leaderboard.ReportRowResponse.MetadataEntry
 	(*timestamppb.Timestamp)(nil),  // 10: google.protobuf.Timestamp
 }
 var file_leaderboard_leaderboard_proto_depIdxs = []int32{
-	10, // 0: leaderboard.v1.LeaderboardEntry.updated_at:type_name -> google.protobuf.Timestamp
-	10, // 1: leaderboard.v1.RankEntry.updated_at:type_name -> google.protobuf.Timestamp
-	0,  // 2: leaderboard.v1.GetPlayerRankRequest.type:type_name -> leaderboard.v1.LeaderboardType
-	10, // 3: leaderboard.v1.GetPlayerRankResponse.last_updated:type_name -> google.protobuf.Timestamp
-	0,  // 4: leaderboard.v1.GetLeaderboardRequest.type:type_name -> leaderboard.v1.LeaderboardType
-	1,  // 5: leaderboard.v1.GetLeaderboardResponse.entries:type_name -> leaderboard.v1.LeaderboardEntry
-	10, // 6: leaderboard.v1.StreamReportRequest.start_time:type_name -> google.protobuf.Timestamp
-	10, // 7: leaderboard.v1.StreamReportRequest.end_time:type_name -> google.protobuf.Timestamp
-	10, // 8: leaderboard.v1.ReportRowResponse.calculated_at:type_name -> google.protobuf.Timestamp
-	9,  // 9: leaderboard.v1.ReportRowResponse.metadata:type_name -> leaderboard.v1.ReportRowResponse.MetadataEntry
-	3,  // 10: leaderboard.v1.LeaderboardService.GetPlayerRank:input_type -> leaderboard.v1.GetPlayerRankRequest
-	5,  // 11: leaderboard.v1.LeaderboardService.GetLeaderboard:input_type -> leaderboard.v1.GetLeaderboardRequest
-	7,  // 12: leaderboard.v1.LeaderboardService.StreamLeaderboardReport:input_type -> leaderboard.v1.StreamReportRequest
-	4,  // 13: leaderboard.v1.LeaderboardService.GetPlayerRank:output_type -> leaderboard.v1.GetPlayerRankResponse
-	6,  // 14: leaderboard.v1.LeaderboardService.GetLeaderboard:output_type -> leaderboard.v1.GetLeaderboardResponse
-	8,  // 15: leaderboard.v1.LeaderboardService.StreamLeaderboardReport:output_type -> leaderboard.v1.ReportRowResponse
+	10, // 0: leaderboard.LeaderboardEntry.updated_at:type_name -> google.protobuf.Timestamp
+	10, // 1: leaderboard.RankEntry.updated_at:type_name -> google.protobuf.Timestamp
+	0,  // 2: leaderboard.GetPlayerRankRequest.type:type_name -> leaderboard.LeaderboardType
+	10, // 3: leaderboard.GetPlayerRankResponse.last_updated:type_name -> google.protobuf.Timestamp
+	0,  // 4: leaderboard.GetLeaderboardRequest.type:type_name -> leaderboard.LeaderboardType
+	1,  // 5: leaderboard.GetLeaderboardResponse.entries:type_name -> leaderboard.LeaderboardEntry
+	10, // 6: leaderboard.StreamReportRequest.start_time:type_name -> google.protobuf.Timestamp
+	10, // 7: leaderboard.StreamReportRequest.end_time:type_name -> google.protobuf.Timestamp
+	10, // 8: leaderboard.ReportRowResponse.calculated_at:type_name -> google.protobuf.Timestamp
+	9,  // 9: leaderboard.ReportRowResponse.metadata:type_name -> leaderboard.ReportRowResponse.MetadataEntry
+	3,  // 10: leaderboard.LeaderboardService.GetPlayerRank:input_type -> leaderboard.GetPlayerRankRequest
+	5,  // 11: leaderboard.LeaderboardService.GetLeaderboard:input_type -> leaderboard.GetLeaderboardRequest
+	7,  // 12: leaderboard.LeaderboardService.StreamLeaderboardReport:input_type -> leaderboard.StreamReportRequest
+	4,  // 13: leaderboard.LeaderboardService.GetPlayerRank:output_type -> leaderboard.GetPlayerRankResponse
+	6,  // 14: leaderboard.LeaderboardService.GetLeaderboard:output_type -> leaderboard.GetLeaderboardResponse
+	8,  // 15: leaderboard.LeaderboardService.StreamLeaderboardReport:output_type -> leaderboard.ReportRowResponse
 	13, // [13:16] is the sub-list for method output_type
 	10, // [10:13] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name

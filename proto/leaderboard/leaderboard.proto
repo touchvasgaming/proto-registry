@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package leaderboard.v1;
+package leaderboard;
 
 import "google/protobuf/timestamp.proto";
 

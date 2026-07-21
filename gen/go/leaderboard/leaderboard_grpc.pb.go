@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LeaderboardService_GetPlayerRank_FullMethodName           = "/leaderboard.v1.LeaderboardService/GetPlayerRank"
-	LeaderboardService_GetLeaderboard_FullMethodName          = "/leaderboard.v1.LeaderboardService/GetLeaderboard"
-	LeaderboardService_StreamLeaderboardReport_FullMethodName = "/leaderboard.v1.LeaderboardService/StreamLeaderboardReport"
+	LeaderboardService_GetPlayerRank_FullMethodName           = "/leaderboard.LeaderboardService/GetPlayerRank"
+	LeaderboardService_GetLeaderboard_FullMethodName          = "/leaderboard.LeaderboardService/GetLeaderboard"
+	LeaderboardService_StreamLeaderboardReport_FullMethodName = "/leaderboard.LeaderboardService/StreamLeaderboardReport"
 )
 
 // LeaderboardServiceClient is the client API for LeaderboardService service.
@@ -196,7 +196,7 @@ type LeaderboardService_StreamLeaderboardReportServer = grpc.ServerStreamingServ
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LeaderboardService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "leaderboard.v1.LeaderboardService",
+	ServiceName: "leaderboard.LeaderboardService",
 	HandlerType: (*LeaderboardServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

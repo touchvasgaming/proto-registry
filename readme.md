@@ -19,7 +19,7 @@
 Now, your microservices don't need the .proto files at all. They simply import the generated Go package via go get:
 
 ```shell
-go get github.com/touchvas/proto-registry/proto-registry/gen/go/identity@v1.0.1
+go get github.com/touchvasgaming/proto-registry/proto-registry/gen/go/reward@v1.0.0
 ```
 
 ```go

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package rewards.v1;
+package reward;
 
 import "google/protobuf/timestamp.proto";
 

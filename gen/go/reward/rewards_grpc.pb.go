@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	RewardsService_TriggerRewardCampaign_FullMethodName     = "/rewards.v1.RewardsService/TriggerRewardCampaign"
-	RewardsService_SyncCampaignConfiguration_FullMethodName = "/rewards.v1.RewardsService/SyncCampaignConfiguration"
+	RewardsService_TriggerRewardCampaign_FullMethodName     = "/reward.RewardsService/TriggerRewardCampaign"
+	RewardsService_SyncCampaignConfiguration_FullMethodName = "/reward.RewardsService/SyncCampaignConfiguration"
 )
 
 // RewardsServiceClient is the client API for RewardsService service.
@@ -152,7 +152,7 @@ func _RewardsService_SyncCampaignConfiguration_Handler(srv interface{}, ctx cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RewardsService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "rewards.v1.RewardsService",
+	ServiceName: "reward.RewardsService",
 	HandlerType: (*RewardsServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
