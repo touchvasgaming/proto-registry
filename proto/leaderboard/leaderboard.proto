@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package leaderboard.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/touchvasgaming/proto-registry/gen/go/leaderboard";
+
+// LeaderboardService provides high-performance internal RPC APIs for
+// service-to-service communication across game ecosystems.
+service LeaderboardService {
+
+  // -------------------------------------------------------------------------
+  // Rewards Service Contracts
+  // -------------------------------------------------------------------------
+
+  // GetPlayerRank retrieves a player's real-time score, rank, and metadata
+  // from the Redis cluster to evaluate reward eligibility.
+  rpc GetPlayerRank (GetPlayerRankRequest) returns (GetPlayerRankResponse);
+
+  // -------------------------------------------------------------------------
+  // Admin & Dashboard Service Contracts
+  // -------------------------------------------------------------------------
+
+  // GetLeaderboard retrieves a paginated snapshot of a specific leaderboard.
+  // Can hit Redis for real-time views or ClickHouse for archived historical snapshots.
+  rpc GetLeaderboard (GetLeaderboardRequest) returns (GetLeaderboardResponse);
+
+  // StreamLeaderboardReport initiates a server-side stream to pull heavy analytical
+  // reports out of ClickHouse without blowing up microservice memory footprints.
+  rpc StreamLeaderboardReport (StreamReportRequest) returns (stream ReportRowResponse);
+}
+
+// ---------------------------------------------------------------------------
+// Shared Data Structures
+// ---------------------------------------------------------------------------
+
+enum LeaderboardType {
+  LEADERBOARD_TYPE_UNSPECIFIED = 0;
+  LEADERBOARD_TYPE_DAILY = 1;
+  LEADERBOARD_TYPE_WEEKLY = 2;
+  LEADERBOARD_TYPE_MONTHLY = 3;
+  LEADERBOARD_TYPE_ALL_TIME = 4;
+}
+
+// Added to match domain/delivery layer expectations
+message LeaderboardEntry {
+  string player_id = 1;
+  double score = 2;
+  int64 rank = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+message RankEntry {
+  string player_id = 1;
+  int64 rank = 2;
+  double score = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+// ---------------------------------------------------------------------------
+// Request / Response Payloads
+// ---------------------------------------------------------------------------
+
+message GetPlayerRankRequest {
+  string tenant_id = 1;
+  string leaderboard_id = 2;
+  string player_id = 3;
+  LeaderboardType type = 4;
+
+  // For target week tracking, e.g., "2026_29". If empty, defaults to current.
+  string timeframe_key = 5;
+}
+
+message GetPlayerRankResponse {
+  string player_id = 1;
+  int64 rank = 2;         // -1 indicates the player hasn't placed/recorded points yet
+  double score = 3;
+  bool is_eligible = 4;   // Business logic helper flag for the rewards engine
+  google.protobuf.Timestamp last_updated = 5;
+}
+
+message GetLeaderboardRequest {
+  string tenant_id = 1;
+  string leaderboard_id = 2;
+  LeaderboardType type = 3;
+  string timeframe_key = 4;
+
+  // Pagination
+  int32 offset = 5;
+  int32 limit = 6;
+}
+
+message GetLeaderboardResponse {
+  string tenant_id = 1;
+  string leaderboard_id = 2;
+  repeated LeaderboardEntry entries = 3; // Updated from RankEntry to LeaderboardEntry
+  int64 total_participants = 4;
+}
+
+message StreamReportRequest {
+  string tenant_id = 1;
+  string leaderboard_id = 2;
+  google.protobuf.Timestamp start_time = 3;
+  google.protobuf.Timestamp end_time = 4;
+
+  // Minimum score threshold filter for audit reviews
+  double min_score = 5;
+}
+
+message ReportRowResponse {
+  string player_id = 1;
+  double final_score = 2;
+  int64 total_events_contributed = 3;
+  google.protobuf.Timestamp calculated_at = 4;
+
+  // Metadata for analytical breakdown (e.g., country code, platform context)
+  map<string, string> metadata = 5;
+}

@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package rewards.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/touchvasgaming/proto-registry/gen/go/reward";
+
+// RewardsService provides internal RPC APIs for creating campaigns,
+// checking status, and manually forcing campaign payouts.
+service RewardsService {
+  // TriggerRewardCampaign forces the execution of a specific reward evaluation matrix.
+  rpc TriggerRewardCampaign (TriggerRewardCampaignRequest) returns (TriggerRewardCampaignResponse);
+
+  // SyncCampaignConfiguration registers or updates an operational campaign boundary.
+  rpc SyncCampaignConfiguration (SyncCampaignRequest) returns (SyncCampaignResponse);
+}
+
+// ---------------------------------------------------------------------------
+// Shared Data Structures
+// ---------------------------------------------------------------------------
+
+enum RewardStyle {
+  REWARD_STYLE_UNSPECIFIED = 0;
+  REWARD_STYLE_FIXED = 1;
+  REWARD_STYLE_SHARED = 2;
+}
+
+message RewardTierProto {
+  int32 min_position = 1;
+  int32 max_position = 2;
+  double amount = 3;
+  RewardStyle style = 4;
+}
+
+// ---------------------------------------------------------------------------
+// Request / Response Payloads
+// ---------------------------------------------------------------------------
+
+message TriggerRewardCampaignRequest {
+  string config_id = 1;
+}
+
+message TriggerRewardCampaignResponse {
+  string config_id = 1;
+  string status = 2;
+  int32 records_processed = 3;
+}
+
+message SyncCampaignRequest {
+  string tenant_id = 1;
+  string game_identifier = 2;
+  string leaderboard_type = 3;
+  string currency = 4;
+  repeated RewardTierProto tiers = 5;
+}
+
+message SyncCampaignResponse {
+  string config_id = 1;
+  bool success = 2;
+}
