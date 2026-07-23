@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package identity;
+
+option go_package = "github.com/touchvasgaming/proto-registry/gen/go/identity";
+
+service ProfileVipService {
+  // Validates if a player can play a game based on VIP tier and balance
+  rpc ValidatePlayEligibility(ValidatePlayEligibilityRequest) returns (ValidatePlayEligibilityResponse);
+
+  // Deducts from the player's available game balance (e.g., deduct 1 free spin)
+  rpc DebitPlayerGame(DebitPlayerGameRequest) returns (DebitPlayerGameResponse);
+}
+
+message ValidatePlayEligibilityRequest {
+  string tenant_id = 1;
+  string player_id = 2;
+  string game_id = 3;
+  int32 required_vip_level = 4;
+}
+
+message ValidatePlayEligibilityResponse {
+  bool is_eligible = 1;
+  string reason = 2; // Provided if is_eligible is false
+}
+
+message DebitPlayerGameRequest {
+  string tenant_id = 1;
+  string player_id = 2;
+  string game_id = 3;
+  int32 amount = 4;
+}
+
+message DebitPlayerGameResponse {
+  bool success = 1;
+  int32 new_balance = 2;
+  string error_message = 3;
+}
