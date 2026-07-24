@@ -22,6 +22,7 @@ message ValidatePlayEligibilityRequest {
 message ValidatePlayEligibilityResponse {
   bool is_eligible = 1;
   string reason = 2; // Provided if is_eligible is false
+  float stake = 3;
 }
 
 message DebitPlayerGameRequest {

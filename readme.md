@@ -6,6 +6,7 @@
 4. Commit the changes and the newly generated .pb.go files. `git add --all && git commit -m "added casino-providers" && git push origin master`
 5. Checck ccurrent tag number `git describe --tags`
 5. Tag the release: `git tag $new_tag_number && git push origin $new_tag_number`
+6. create relea: `gh release create v1.0.4 --title "v1.0.4" --notes "added identity service"` 
 
 ## Standardize Your Package Options
 - To avoid import conflicts, every .proto file must have a `go_package option` that points back to your registry repository. Update your files as follows:

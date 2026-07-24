@@ -93,6 +93,7 @@ type ValidatePlayEligibilityResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IsEligible    bool                   `protobuf:"varint,1,opt,name=is_eligible,json=isEligible,proto3" json:"is_eligible,omitempty"`
 	Reason        string                 `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"` // Provided if is_eligible is false
+	Stake         float32                `protobuf:"fixed32,3,opt,name=stake,proto3" json:"stake,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -139,6 +140,13 @@ func (x *ValidatePlayEligibilityResponse) GetReason() string {
 		return x.Reason
 	}
 	return ""
+}
+
+func (x *ValidatePlayEligibilityResponse) GetStake() float32 {
+	if x != nil {
+		return x.Stake
+	}
+	return 0
 }
 
 type DebitPlayerGameRequest struct {
@@ -278,11 +286,12 @@ const file_identity_identity_proto_rawDesc = "" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tplayer_id\x18\x02 \x01(\tR\bplayerId\x12\x17\n" +
 	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12,\n" +
-	"\x12required_vip_level\x18\x04 \x01(\x05R\x10requiredVipLevel\"Z\n" +
+	"\x12required_vip_level\x18\x04 \x01(\x05R\x10requiredVipLevel\"p\n" +
 	"\x1fValidatePlayEligibilityResponse\x12\x1f\n" +
 	"\vis_eligible\x18\x01 \x01(\bR\n" +
 	"isEligible\x12\x16\n" +
-	"\x06reason\x18\x02 \x01(\tR\x06reason\"\x83\x01\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\x12\x14\n" +
+	"\x05stake\x18\x03 \x01(\x02R\x05stake\"\x83\x01\n" +
 	"\x16DebitPlayerGameRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tplayer_id\x18\x02 \x01(\tR\bplayerId\x12\x17\n" +
