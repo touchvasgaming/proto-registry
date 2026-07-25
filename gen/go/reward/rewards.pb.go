@@ -71,6 +71,58 @@ func (RewardStyle) EnumDescriptor() ([]byte, []int) {
 	return file_reward_rewards_proto_rawDescGZIP(), []int{0}
 }
 
+type RewardType int32
+
+const (
+	RewardType_REWARD_TYPE_GAME   RewardType = 0
+	RewardType_REWARD_TYPE_CASH   RewardType = 1
+	RewardType_REWARD_TYPE_BONUS  RewardType = 2
+	RewardType_REWARD_TYPE_POINTS RewardType = 3
+)
+
+// Enum value maps for RewardType.
+var (
+	RewardType_name = map[int32]string{
+		0: "REWARD_TYPE_GAME",
+		1: "REWARD_TYPE_CASH",
+		2: "REWARD_TYPE_BONUS",
+		3: "REWARD_TYPE_POINTS",
+	}
+	RewardType_value = map[string]int32{
+		"REWARD_TYPE_GAME":   0,
+		"REWARD_TYPE_CASH":   1,
+		"REWARD_TYPE_BONUS":  2,
+		"REWARD_TYPE_POINTS": 3,
+	}
+)
+
+func (x RewardType) Enum() *RewardType {
+	p := new(RewardType)
+	*p = x
+	return p
+}
+
+func (x RewardType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RewardType) Descriptor() protoreflect.EnumDescriptor {
+	return file_reward_rewards_proto_enumTypes[1].Descriptor()
+}
+
+func (RewardType) Type() protoreflect.EnumType {
+	return &file_reward_rewards_proto_enumTypes[1]
+}
+
+func (x RewardType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RewardType.Descriptor instead.
+func (RewardType) EnumDescriptor() ([]byte, []int) {
+	return file_reward_rewards_proto_rawDescGZIP(), []int{1}
+}
+
 type RewardTierProto struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MinPosition   int32                  `protobuf:"varint,1,opt,name=min_position,json=minPosition,proto3" json:"min_position,omitempty"`
@@ -371,6 +423,126 @@ func (x *SyncCampaignResponse) GetSuccess() bool {
 	return false
 }
 
+type InitiateRewardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TenantID      string                 `protobuf:"bytes,1,opt,name=tenantID,proto3" json:"tenantID,omitempty"`
+	PlayerID      string                 `protobuf:"bytes,2,opt,name=playerID,proto3" json:"playerID,omitempty"`
+	RewardValue   string                 `protobuf:"bytes,3,opt,name=rewardValue,proto3" json:"rewardValue,omitempty"`
+	RewardType    RewardType             `protobuf:"varint,4,opt,name=rewardType,proto3,enum=reward.RewardType" json:"rewardType,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InitiateRewardRequest) Reset() {
+	*x = InitiateRewardRequest{}
+	mi := &file_reward_rewards_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InitiateRewardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitiateRewardRequest) ProtoMessage() {}
+
+func (x *InitiateRewardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_reward_rewards_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitiateRewardRequest.ProtoReflect.Descriptor instead.
+func (*InitiateRewardRequest) Descriptor() ([]byte, []int) {
+	return file_reward_rewards_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *InitiateRewardRequest) GetTenantID() string {
+	if x != nil {
+		return x.TenantID
+	}
+	return ""
+}
+
+func (x *InitiateRewardRequest) GetPlayerID() string {
+	if x != nil {
+		return x.PlayerID
+	}
+	return ""
+}
+
+func (x *InitiateRewardRequest) GetRewardValue() string {
+	if x != nil {
+		return x.RewardValue
+	}
+	return ""
+}
+
+func (x *InitiateRewardRequest) GetRewardType() RewardType {
+	if x != nil {
+		return x.RewardType
+	}
+	return RewardType_REWARD_TYPE_GAME
+}
+
+type InitiateRewardResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Description   string                 `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
+	Success       bool                   `protobuf:"varint,2,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InitiateRewardResponse) Reset() {
+	*x = InitiateRewardResponse{}
+	mi := &file_reward_rewards_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InitiateRewardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitiateRewardResponse) ProtoMessage() {}
+
+func (x *InitiateRewardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_reward_rewards_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitiateRewardResponse.ProtoReflect.Descriptor instead.
+func (*InitiateRewardResponse) Descriptor() ([]byte, []int) {
+	return file_reward_rewards_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *InitiateRewardResponse) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *InitiateRewardResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_reward_rewards_proto protoreflect.FileDescriptor
 
 const file_reward_rewards_proto_rawDesc = "" +
@@ -395,14 +567,31 @@ const file_reward_rewards_proto_rawDesc = "" +
 	"\x05tiers\x18\x05 \x03(\v2\x17.reward.RewardTierProtoR\x05tiers\"M\n" +
 	"\x14SyncCampaignResponse\x12\x1b\n" +
 	"\tconfig_id\x18\x01 \x01(\tR\bconfigId\x12\x18\n" +
+	"\asuccess\x18\x02 \x01(\bR\asuccess\"\xa5\x01\n" +
+	"\x15InitiateRewardRequest\x12\x1a\n" +
+	"\btenantID\x18\x01 \x01(\tR\btenantID\x12\x1a\n" +
+	"\bplayerID\x18\x02 \x01(\tR\bplayerID\x12 \n" +
+	"\vrewardValue\x18\x03 \x01(\tR\vrewardValue\x122\n" +
+	"\n" +
+	"rewardType\x18\x04 \x01(\x0e2\x12.reward.RewardTypeR\n" +
+	"rewardType\"T\n" +
+	"\x16InitiateRewardResponse\x12 \n" +
+	"\vdescription\x18\x01 \x01(\tR\vdescription\x12\x18\n" +
 	"\asuccess\x18\x02 \x01(\bR\asuccess*\\\n" +
 	"\vRewardStyle\x12\x1c\n" +
 	"\x18REWARD_STYLE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12REWARD_STYLE_FIXED\x10\x01\x12\x17\n" +
-	"\x13REWARD_STYLE_SHARED\x10\x022\xce\x01\n" +
+	"\x13REWARD_STYLE_SHARED\x10\x02*g\n" +
+	"\n" +
+	"RewardType\x12\x14\n" +
+	"\x10REWARD_TYPE_GAME\x10\x00\x12\x14\n" +
+	"\x10REWARD_TYPE_CASH\x10\x01\x12\x15\n" +
+	"\x11REWARD_TYPE_BONUS\x10\x02\x12\x16\n" +
+	"\x12REWARD_TYPE_POINTS\x10\x032\x9f\x02\n" +
 	"\x0eRewardsService\x12d\n" +
 	"\x15TriggerRewardCampaign\x12$.reward.TriggerRewardCampaignRequest\x1a%.reward.TriggerRewardCampaignResponse\x12V\n" +
-	"\x19SyncCampaignConfiguration\x12\x1b.reward.SyncCampaignRequest\x1a\x1c.reward.SyncCampaignResponseB8Z6github.com/touchvasgaming/proto-registry/gen/go/rewardb\x06proto3"
+	"\x19SyncCampaignConfiguration\x12\x1b.reward.SyncCampaignRequest\x1a\x1c.reward.SyncCampaignResponse\x12O\n" +
+	"\x0eInitiateReward\x12\x1d.reward.InitiateRewardRequest\x1a\x1e.reward.InitiateRewardResponseB8Z6github.com/touchvasgaming/proto-registry/gen/go/rewardb\x06proto3"
 
 var (
 	file_reward_rewards_proto_rawDescOnce sync.Once
@@ -416,28 +605,34 @@ func file_reward_rewards_proto_rawDescGZIP() []byte {
 	return file_reward_rewards_proto_rawDescData
 }
 
-var file_reward_rewards_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_reward_rewards_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_reward_rewards_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_reward_rewards_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_reward_rewards_proto_goTypes = []any{
 	(RewardStyle)(0),                      // 0: reward.RewardStyle
-	(*RewardTierProto)(nil),               // 1: reward.RewardTierProto
-	(*TriggerRewardCampaignRequest)(nil),  // 2: reward.TriggerRewardCampaignRequest
-	(*TriggerRewardCampaignResponse)(nil), // 3: reward.TriggerRewardCampaignResponse
-	(*SyncCampaignRequest)(nil),           // 4: reward.SyncCampaignRequest
-	(*SyncCampaignResponse)(nil),          // 5: reward.SyncCampaignResponse
+	(RewardType)(0),                       // 1: reward.RewardType
+	(*RewardTierProto)(nil),               // 2: reward.RewardTierProto
+	(*TriggerRewardCampaignRequest)(nil),  // 3: reward.TriggerRewardCampaignRequest
+	(*TriggerRewardCampaignResponse)(nil), // 4: reward.TriggerRewardCampaignResponse
+	(*SyncCampaignRequest)(nil),           // 5: reward.SyncCampaignRequest
+	(*SyncCampaignResponse)(nil),          // 6: reward.SyncCampaignResponse
+	(*InitiateRewardRequest)(nil),         // 7: reward.InitiateRewardRequest
+	(*InitiateRewardResponse)(nil),        // 8: reward.InitiateRewardResponse
 }
 var file_reward_rewards_proto_depIdxs = []int32{
 	0, // 0: reward.RewardTierProto.style:type_name -> reward.RewardStyle
-	1, // 1: reward.SyncCampaignRequest.tiers:type_name -> reward.RewardTierProto
-	2, // 2: reward.RewardsService.TriggerRewardCampaign:input_type -> reward.TriggerRewardCampaignRequest
-	4, // 3: reward.RewardsService.SyncCampaignConfiguration:input_type -> reward.SyncCampaignRequest
-	3, // 4: reward.RewardsService.TriggerRewardCampaign:output_type -> reward.TriggerRewardCampaignResponse
-	5, // 5: reward.RewardsService.SyncCampaignConfiguration:output_type -> reward.SyncCampaignResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	2, // 1: reward.SyncCampaignRequest.tiers:type_name -> reward.RewardTierProto
+	1, // 2: reward.InitiateRewardRequest.rewardType:type_name -> reward.RewardType
+	3, // 3: reward.RewardsService.TriggerRewardCampaign:input_type -> reward.TriggerRewardCampaignRequest
+	5, // 4: reward.RewardsService.SyncCampaignConfiguration:input_type -> reward.SyncCampaignRequest
+	7, // 5: reward.RewardsService.InitiateReward:input_type -> reward.InitiateRewardRequest
+	4, // 6: reward.RewardsService.TriggerRewardCampaign:output_type -> reward.TriggerRewardCampaignResponse
+	6, // 7: reward.RewardsService.SyncCampaignConfiguration:output_type -> reward.SyncCampaignResponse
+	8, // 8: reward.RewardsService.InitiateReward:output_type -> reward.InitiateRewardResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_reward_rewards_proto_init() }
@@ -450,8 +645,8 @@ func file_reward_rewards_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_reward_rewards_proto_rawDesc), len(file_reward_rewards_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   5,
+			NumEnums:      2,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

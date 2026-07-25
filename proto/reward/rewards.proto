@@ -14,6 +14,9 @@ service RewardsService {
 
   // SyncCampaignConfiguration registers or updates an operational campaign boundary.
   rpc SyncCampaignConfiguration (SyncCampaignRequest) returns (SyncCampaignResponse);
+
+  // InitiateReward triggers a reward
+  rpc InitiateReward (InitiateRewardRequest) returns (InitiateRewardResponse);
 }
 
 // ---------------------------------------------------------------------------
@@ -24,6 +27,13 @@ enum RewardStyle {
   REWARD_STYLE_UNSPECIFIED = 0;
   REWARD_STYLE_FIXED = 1;
   REWARD_STYLE_SHARED = 2;
+}
+
+enum RewardType {
+  REWARD_TYPE_GAME = 0;
+  REWARD_TYPE_CASH = 1;
+  REWARD_TYPE_BONUS = 2;
+  REWARD_TYPE_POINTS = 3;
 }
 
 message RewardTierProto {
@@ -57,5 +67,17 @@ message SyncCampaignRequest {
 
 message SyncCampaignResponse {
   string config_id = 1;
+  bool success = 2;
+}
+
+message InitiateRewardRequest {
+  string tenantID = 1;
+  string playerID = 2;
+  string rewardValue = 3;
+  RewardType rewardType = 4;
+}
+
+message InitiateRewardResponse {
+  string description = 1;
   bool success = 2;
 }

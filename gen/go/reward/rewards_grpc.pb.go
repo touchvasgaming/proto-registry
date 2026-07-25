@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	RewardsService_TriggerRewardCampaign_FullMethodName     = "/reward.RewardsService/TriggerRewardCampaign"
 	RewardsService_SyncCampaignConfiguration_FullMethodName = "/reward.RewardsService/SyncCampaignConfiguration"
+	RewardsService_InitiateReward_FullMethodName            = "/reward.RewardsService/InitiateReward"
 )
 
 // RewardsServiceClient is the client API for RewardsService service.
@@ -34,6 +35,8 @@ type RewardsServiceClient interface {
 	TriggerRewardCampaign(ctx context.Context, in *TriggerRewardCampaignRequest, opts ...grpc.CallOption) (*TriggerRewardCampaignResponse, error)
 	// SyncCampaignConfiguration registers or updates an operational campaign boundary.
 	SyncCampaignConfiguration(ctx context.Context, in *SyncCampaignRequest, opts ...grpc.CallOption) (*SyncCampaignResponse, error)
+	// InitiateReward triggers a reward
+	InitiateReward(ctx context.Context, in *InitiateRewardRequest, opts ...grpc.CallOption) (*InitiateRewardResponse, error)
 }
 
 type rewardsServiceClient struct {
@@ -64,6 +67,16 @@ func (c *rewardsServiceClient) SyncCampaignConfiguration(ctx context.Context, in
 	return out, nil
 }
 
+func (c *rewardsServiceClient) InitiateReward(ctx context.Context, in *InitiateRewardRequest, opts ...grpc.CallOption) (*InitiateRewardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InitiateRewardResponse)
+	err := c.cc.Invoke(ctx, RewardsService_InitiateReward_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RewardsServiceServer is the server API for RewardsService service.
 // All implementations must embed UnimplementedRewardsServiceServer
 // for forward compatibility.
@@ -75,6 +88,8 @@ type RewardsServiceServer interface {
 	TriggerRewardCampaign(context.Context, *TriggerRewardCampaignRequest) (*TriggerRewardCampaignResponse, error)
 	// SyncCampaignConfiguration registers or updates an operational campaign boundary.
 	SyncCampaignConfiguration(context.Context, *SyncCampaignRequest) (*SyncCampaignResponse, error)
+	// InitiateReward triggers a reward
+	InitiateReward(context.Context, *InitiateRewardRequest) (*InitiateRewardResponse, error)
 	mustEmbedUnimplementedRewardsServiceServer()
 }
 
@@ -90,6 +105,9 @@ func (UnimplementedRewardsServiceServer) TriggerRewardCampaign(context.Context, 
 }
 func (UnimplementedRewardsServiceServer) SyncCampaignConfiguration(context.Context, *SyncCampaignRequest) (*SyncCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SyncCampaignConfiguration not implemented")
+}
+func (UnimplementedRewardsServiceServer) InitiateReward(context.Context, *InitiateRewardRequest) (*InitiateRewardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InitiateReward not implemented")
 }
 func (UnimplementedRewardsServiceServer) mustEmbedUnimplementedRewardsServiceServer() {}
 func (UnimplementedRewardsServiceServer) testEmbeddedByValue()                        {}
@@ -148,6 +166,24 @@ func _RewardsService_SyncCampaignConfiguration_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RewardsService_InitiateReward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitiateRewardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RewardsServiceServer).InitiateReward(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RewardsService_InitiateReward_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RewardsServiceServer).InitiateReward(ctx, req.(*InitiateRewardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RewardsService_ServiceDesc is the grpc.ServiceDesc for RewardsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -162,6 +198,10 @@ var RewardsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SyncCampaignConfiguration",
 			Handler:    _RewardsService_SyncCampaignConfiguration_Handler,
+		},
+		{
+			MethodName: "InitiateReward",
+			Handler:    _RewardsService_InitiateReward_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
