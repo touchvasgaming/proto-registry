@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	ProfileVipService_ValidatePlayEligibility_FullMethodName = "/identity.ProfileVipService/ValidatePlayEligibility"
 	ProfileVipService_DebitPlayerGame_FullMethodName         = "/identity.ProfileVipService/DebitPlayerGame"
+	ProfileVipService_CreditPlayerGame_FullMethodName        = "/identity.ProfileVipService/CreditPlayerGame"
 )
 
 // ProfileVipServiceClient is the client API for ProfileVipService service.
@@ -31,6 +32,7 @@ type ProfileVipServiceClient interface {
 	ValidatePlayEligibility(ctx context.Context, in *ValidatePlayEligibilityRequest, opts ...grpc.CallOption) (*ValidatePlayEligibilityResponse, error)
 	// Deducts from the player's available game balance (e.g., deduct 1 free spin)
 	DebitPlayerGame(ctx context.Context, in *DebitPlayerGameRequest, opts ...grpc.CallOption) (*DebitPlayerGameResponse, error)
+	CreditPlayerGame(ctx context.Context, in *CreditPlayerGameRequest, opts ...grpc.CallOption) (*CreditPlayerGameResponse, error)
 }
 
 type profileVipServiceClient struct {
@@ -61,6 +63,16 @@ func (c *profileVipServiceClient) DebitPlayerGame(ctx context.Context, in *Debit
 	return out, nil
 }
 
+func (c *profileVipServiceClient) CreditPlayerGame(ctx context.Context, in *CreditPlayerGameRequest, opts ...grpc.CallOption) (*CreditPlayerGameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreditPlayerGameResponse)
+	err := c.cc.Invoke(ctx, ProfileVipService_CreditPlayerGame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProfileVipServiceServer is the server API for ProfileVipService service.
 // All implementations must embed UnimplementedProfileVipServiceServer
 // for forward compatibility.
@@ -69,6 +81,7 @@ type ProfileVipServiceServer interface {
 	ValidatePlayEligibility(context.Context, *ValidatePlayEligibilityRequest) (*ValidatePlayEligibilityResponse, error)
 	// Deducts from the player's available game balance (e.g., deduct 1 free spin)
 	DebitPlayerGame(context.Context, *DebitPlayerGameRequest) (*DebitPlayerGameResponse, error)
+	CreditPlayerGame(context.Context, *CreditPlayerGameRequest) (*CreditPlayerGameResponse, error)
 	mustEmbedUnimplementedProfileVipServiceServer()
 }
 
@@ -84,6 +97,9 @@ func (UnimplementedProfileVipServiceServer) ValidatePlayEligibility(context.Cont
 }
 func (UnimplementedProfileVipServiceServer) DebitPlayerGame(context.Context, *DebitPlayerGameRequest) (*DebitPlayerGameResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DebitPlayerGame not implemented")
+}
+func (UnimplementedProfileVipServiceServer) CreditPlayerGame(context.Context, *CreditPlayerGameRequest) (*CreditPlayerGameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreditPlayerGame not implemented")
 }
 func (UnimplementedProfileVipServiceServer) mustEmbedUnimplementedProfileVipServiceServer() {}
 func (UnimplementedProfileVipServiceServer) testEmbeddedByValue()                           {}
@@ -142,6 +158,24 @@ func _ProfileVipService_DebitPlayerGame_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProfileVipService_CreditPlayerGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreditPlayerGameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileVipServiceServer).CreditPlayerGame(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileVipService_CreditPlayerGame_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileVipServiceServer).CreditPlayerGame(ctx, req.(*CreditPlayerGameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProfileVipService_ServiceDesc is the grpc.ServiceDesc for ProfileVipService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +190,10 @@ var ProfileVipService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DebitPlayerGame",
 			Handler:    _ProfileVipService_DebitPlayerGame_Handler,
+		},
+		{
+			MethodName: "CreditPlayerGame",
+			Handler:    _ProfileVipService_CreditPlayerGame_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -277,6 +277,134 @@ func (x *DebitPlayerGameResponse) GetErrorMessage() string {
 	return ""
 }
 
+type CreditPlayerGameRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TenantId      string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	PlayerId      string                 `protobuf:"bytes,2,opt,name=player_id,json=playerId,proto3" json:"player_id,omitempty"`
+	GameId        string                 `protobuf:"bytes,3,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	Amount        int32                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreditPlayerGameRequest) Reset() {
+	*x = CreditPlayerGameRequest{}
+	mi := &file_identity_identity_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreditPlayerGameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreditPlayerGameRequest) ProtoMessage() {}
+
+func (x *CreditPlayerGameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_identity_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreditPlayerGameRequest.ProtoReflect.Descriptor instead.
+func (*CreditPlayerGameRequest) Descriptor() ([]byte, []int) {
+	return file_identity_identity_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreditPlayerGameRequest) GetTenantId() string {
+	if x != nil {
+		return x.TenantId
+	}
+	return ""
+}
+
+func (x *CreditPlayerGameRequest) GetPlayerId() string {
+	if x != nil {
+		return x.PlayerId
+	}
+	return ""
+}
+
+func (x *CreditPlayerGameRequest) GetGameId() string {
+	if x != nil {
+		return x.GameId
+	}
+	return ""
+}
+
+func (x *CreditPlayerGameRequest) GetAmount() int32 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type CreditPlayerGameResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	NewBalance    int32                  `protobuf:"varint,2,opt,name=new_balance,json=newBalance,proto3" json:"new_balance,omitempty"`
+	ErrorMessage  string                 `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreditPlayerGameResponse) Reset() {
+	*x = CreditPlayerGameResponse{}
+	mi := &file_identity_identity_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreditPlayerGameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreditPlayerGameResponse) ProtoMessage() {}
+
+func (x *CreditPlayerGameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_identity_identity_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreditPlayerGameResponse.ProtoReflect.Descriptor instead.
+func (*CreditPlayerGameResponse) Descriptor() ([]byte, []int) {
+	return file_identity_identity_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreditPlayerGameResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *CreditPlayerGameResponse) GetNewBalance() int32 {
+	if x != nil {
+		return x.NewBalance
+	}
+	return 0
+}
+
+func (x *CreditPlayerGameResponse) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
 var File_identity_identity_proto protoreflect.FileDescriptor
 
 const file_identity_identity_proto_rawDesc = "" +
@@ -301,10 +429,21 @@ const file_identity_identity_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1f\n" +
 	"\vnew_balance\x18\x02 \x01(\x05R\n" +
 	"newBalance\x12#\n" +
-	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage2\xdb\x01\n" +
+	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\"\x84\x01\n" +
+	"\x17CreditPlayerGameRequest\x12\x1b\n" +
+	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
+	"\tplayer_id\x18\x02 \x01(\tR\bplayerId\x12\x17\n" +
+	"\agame_id\x18\x03 \x01(\tR\x06gameId\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x05R\x06amount\"z\n" +
+	"\x18CreditPlayerGameResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1f\n" +
+	"\vnew_balance\x18\x02 \x01(\x05R\n" +
+	"newBalance\x12#\n" +
+	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage2\xb6\x02\n" +
 	"\x11ProfileVipService\x12n\n" +
 	"\x17ValidatePlayEligibility\x12(.identity.ValidatePlayEligibilityRequest\x1a).identity.ValidatePlayEligibilityResponse\x12V\n" +
-	"\x0fDebitPlayerGame\x12 .identity.DebitPlayerGameRequest\x1a!.identity.DebitPlayerGameResponseB:Z8github.com/touchvasgaming/proto-registry/gen/go/identityb\x06proto3"
+	"\x0fDebitPlayerGame\x12 .identity.DebitPlayerGameRequest\x1a!.identity.DebitPlayerGameResponse\x12Y\n" +
+	"\x10CreditPlayerGame\x12!.identity.CreditPlayerGameRequest\x1a\".identity.CreditPlayerGameResponseB:Z8github.com/touchvasgaming/proto-registry/gen/go/identityb\x06proto3"
 
 var (
 	file_identity_identity_proto_rawDescOnce sync.Once
@@ -318,20 +457,24 @@ func file_identity_identity_proto_rawDescGZIP() []byte {
 	return file_identity_identity_proto_rawDescData
 }
 
-var file_identity_identity_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_identity_identity_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_identity_identity_proto_goTypes = []any{
 	(*ValidatePlayEligibilityRequest)(nil),  // 0: identity.ValidatePlayEligibilityRequest
 	(*ValidatePlayEligibilityResponse)(nil), // 1: identity.ValidatePlayEligibilityResponse
 	(*DebitPlayerGameRequest)(nil),          // 2: identity.DebitPlayerGameRequest
 	(*DebitPlayerGameResponse)(nil),         // 3: identity.DebitPlayerGameResponse
+	(*CreditPlayerGameRequest)(nil),         // 4: identity.CreditPlayerGameRequest
+	(*CreditPlayerGameResponse)(nil),        // 5: identity.CreditPlayerGameResponse
 }
 var file_identity_identity_proto_depIdxs = []int32{
 	0, // 0: identity.ProfileVipService.ValidatePlayEligibility:input_type -> identity.ValidatePlayEligibilityRequest
 	2, // 1: identity.ProfileVipService.DebitPlayerGame:input_type -> identity.DebitPlayerGameRequest
-	1, // 2: identity.ProfileVipService.ValidatePlayEligibility:output_type -> identity.ValidatePlayEligibilityResponse
-	3, // 3: identity.ProfileVipService.DebitPlayerGame:output_type -> identity.DebitPlayerGameResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	4, // 2: identity.ProfileVipService.CreditPlayerGame:input_type -> identity.CreditPlayerGameRequest
+	1, // 3: identity.ProfileVipService.ValidatePlayEligibility:output_type -> identity.ValidatePlayEligibilityResponse
+	3, // 4: identity.ProfileVipService.DebitPlayerGame:output_type -> identity.DebitPlayerGameResponse
+	5, // 5: identity.ProfileVipService.CreditPlayerGame:output_type -> identity.CreditPlayerGameResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -348,7 +491,7 @@ func file_identity_identity_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_identity_identity_proto_rawDesc), len(file_identity_identity_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

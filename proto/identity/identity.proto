@@ -10,6 +10,7 @@ service ProfileVipService {
 
   // Deducts from the player's available game balance (e.g., deduct 1 free spin)
   rpc DebitPlayerGame(DebitPlayerGameRequest) returns (DebitPlayerGameResponse);
+  rpc CreditPlayerGame(CreditPlayerGameRequest) returns (CreditPlayerGameResponse);
 }
 
 message ValidatePlayEligibilityRequest {
@@ -33,6 +34,19 @@ message DebitPlayerGameRequest {
 }
 
 message DebitPlayerGameResponse {
+  bool success = 1;
+  int32 new_balance = 2;
+  string error_message = 3;
+}
+
+message CreditPlayerGameRequest {
+  string tenant_id = 1;
+  string player_id = 2;
+  string game_id = 3;
+  int32 amount = 4;
+}
+
+message CreditPlayerGameResponse {
   bool success = 1;
   int32 new_balance = 2;
   string error_message = 3;
