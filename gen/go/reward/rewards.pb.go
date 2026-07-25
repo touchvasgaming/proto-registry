@@ -429,6 +429,7 @@ type InitiateRewardRequest struct {
 	PlayerID      string                 `protobuf:"bytes,2,opt,name=playerID,proto3" json:"playerID,omitempty"`
 	RewardValue   string                 `protobuf:"bytes,3,opt,name=rewardValue,proto3" json:"rewardValue,omitempty"`
 	RewardType    RewardType             `protobuf:"varint,4,opt,name=rewardType,proto3,enum=reward.RewardType" json:"rewardType,omitempty"`
+	Reference     string                 `protobuf:"bytes,5,opt,name=reference,proto3" json:"reference,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -489,6 +490,13 @@ func (x *InitiateRewardRequest) GetRewardType() RewardType {
 		return x.RewardType
 	}
 	return RewardType_REWARD_TYPE_GAME
+}
+
+func (x *InitiateRewardRequest) GetReference() string {
+	if x != nil {
+		return x.Reference
+	}
+	return ""
 }
 
 type InitiateRewardResponse struct {
@@ -567,14 +575,15 @@ const file_reward_rewards_proto_rawDesc = "" +
 	"\x05tiers\x18\x05 \x03(\v2\x17.reward.RewardTierProtoR\x05tiers\"M\n" +
 	"\x14SyncCampaignResponse\x12\x1b\n" +
 	"\tconfig_id\x18\x01 \x01(\tR\bconfigId\x12\x18\n" +
-	"\asuccess\x18\x02 \x01(\bR\asuccess\"\xa5\x01\n" +
+	"\asuccess\x18\x02 \x01(\bR\asuccess\"\xc3\x01\n" +
 	"\x15InitiateRewardRequest\x12\x1a\n" +
 	"\btenantID\x18\x01 \x01(\tR\btenantID\x12\x1a\n" +
 	"\bplayerID\x18\x02 \x01(\tR\bplayerID\x12 \n" +
 	"\vrewardValue\x18\x03 \x01(\tR\vrewardValue\x122\n" +
 	"\n" +
 	"rewardType\x18\x04 \x01(\x0e2\x12.reward.RewardTypeR\n" +
-	"rewardType\"T\n" +
+	"rewardType\x12\x1c\n" +
+	"\treference\x18\x05 \x01(\tR\treference\"T\n" +
 	"\x16InitiateRewardResponse\x12 \n" +
 	"\vdescription\x18\x01 \x01(\tR\vdescription\x12\x18\n" +
 	"\asuccess\x18\x02 \x01(\bR\asuccess*\\\n" +
