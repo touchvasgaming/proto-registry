@@ -1,6 +1,6 @@
 module github.com/touchvasgaming/proto-registry/gen/go
 
-go 1.26.4
+go 1.26.0
 
 require (
 	google.golang.org/grpc v1.82.1
