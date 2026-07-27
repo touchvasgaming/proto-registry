@@ -424,14 +424,15 @@ func (x *SyncCampaignResponse) GetSuccess() bool {
 }
 
 type InitiateRewardRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantID      string                 `protobuf:"bytes,1,opt,name=tenantID,proto3" json:"tenantID,omitempty"`
-	PlayerID      string                 `protobuf:"bytes,2,opt,name=playerID,proto3" json:"playerID,omitempty"`
-	RewardValue   string                 `protobuf:"bytes,3,opt,name=rewardValue,proto3" json:"rewardValue,omitempty"`
-	RewardType    RewardType             `protobuf:"varint,4,opt,name=rewardType,proto3,enum=reward.RewardType" json:"rewardType,omitempty"`
-	Reference     string                 `protobuf:"bytes,5,opt,name=reference,proto3" json:"reference,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	TenantID       string                 `protobuf:"bytes,1,opt,name=tenantID,proto3" json:"tenantID,omitempty"`
+	PlayerID       string                 `protobuf:"bytes,2,opt,name=playerID,proto3" json:"playerID,omitempty"`
+	RewardValue    string                 `protobuf:"bytes,3,opt,name=rewardValue,proto3" json:"rewardValue,omitempty"`
+	RewardType     RewardType             `protobuf:"varint,4,opt,name=rewardType,proto3,enum=reward.RewardType" json:"rewardType,omitempty"`
+	Reference      string                 `protobuf:"bytes,5,opt,name=reference,proto3" json:"reference,omitempty"`
+	GameIdentifier string                 `protobuf:"bytes,6,opt,name=GameIdentifier,proto3" json:"GameIdentifier,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *InitiateRewardRequest) Reset() {
@@ -495,6 +496,13 @@ func (x *InitiateRewardRequest) GetRewardType() RewardType {
 func (x *InitiateRewardRequest) GetReference() string {
 	if x != nil {
 		return x.Reference
+	}
+	return ""
+}
+
+func (x *InitiateRewardRequest) GetGameIdentifier() string {
+	if x != nil {
+		return x.GameIdentifier
 	}
 	return ""
 }
@@ -575,7 +583,7 @@ const file_reward_rewards_proto_rawDesc = "" +
 	"\x05tiers\x18\x05 \x03(\v2\x17.reward.RewardTierProtoR\x05tiers\"M\n" +
 	"\x14SyncCampaignResponse\x12\x1b\n" +
 	"\tconfig_id\x18\x01 \x01(\tR\bconfigId\x12\x18\n" +
-	"\asuccess\x18\x02 \x01(\bR\asuccess\"\xc3\x01\n" +
+	"\asuccess\x18\x02 \x01(\bR\asuccess\"\xeb\x01\n" +
 	"\x15InitiateRewardRequest\x12\x1a\n" +
 	"\btenantID\x18\x01 \x01(\tR\btenantID\x12\x1a\n" +
 	"\bplayerID\x18\x02 \x01(\tR\bplayerID\x12 \n" +
@@ -583,7 +591,8 @@ const file_reward_rewards_proto_rawDesc = "" +
 	"\n" +
 	"rewardType\x18\x04 \x01(\x0e2\x12.reward.RewardTypeR\n" +
 	"rewardType\x12\x1c\n" +
-	"\treference\x18\x05 \x01(\tR\treference\"T\n" +
+	"\treference\x18\x05 \x01(\tR\treference\x12&\n" +
+	"\x0eGameIdentifier\x18\x06 \x01(\tR\x0eGameIdentifier\"T\n" +
 	"\x16InitiateRewardResponse\x12 \n" +
 	"\vdescription\x18\x01 \x01(\tR\vdescription\x12\x18\n" +
 	"\asuccess\x18\x02 \x01(\bR\asuccess*\\\n" +

@@ -76,6 +76,7 @@ message InitiateRewardRequest {
   string rewardValue = 3;
   RewardType rewardType = 4;
   string reference = 5;
+  string GameIdentifier = 6;
 }
 
 message InitiateRewardResponse {
