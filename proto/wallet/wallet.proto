@@ -3,14 +3,25 @@ syntax = "proto3";
 package reward;
 
 import "google/protobuf/timestamp.proto";
+// 1. Import the Well-Known Type
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/touchvasgaming/proto-registry/gen/go/wallet";
+
+enum RewardTypes {
+  REWARD_TYPE_GAME = 0;
+  REWARD_TYPE_CASH = 1;
+  REWARD_TYPE_BONUS = 2;
+  REWARD_TYPE_POINTS = 3;
+  REWARD_TYPE_POINTS_MULTIPLIER = 4;
+}
 
 // RewardsService provides internal RPC APIs for creating campaigns,
 // checking status, and manually forcing campaign payouts.
 service WalletService {
   // Debit request to debit game balance
   rpc Debit (DebitRequest) returns (DebitResponse);
+  rpc Credit (CreditRequest) returns (CreditResponse);
 
 }
 
@@ -28,4 +39,22 @@ message DebitRequest {
 message DebitResponse {
   string status = 1;
   string message = 2;
+}
+
+message CreditResponse {
+  string status = 1;
+  string message = 2;
+}
+
+message RewardType {
+  RewardTypes rewardType = 1;
+  // 2. Use the Struct type for your map[string]interface{}
+  google.protobuf.Struct metadata = 2;
+}
+
+message CreditRequest {
+  string TenantID = 1;
+  string ProfileID = 2;
+  float Amount = 3;
+  RewardType rewardType = 4;
 }
