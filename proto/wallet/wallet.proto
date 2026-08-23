@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package reward;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/touchvasgaming/proto-registry/gen/go/wallet";
+
+// RewardsService provides internal RPC APIs for creating campaigns,
+// checking status, and manually forcing campaign payouts.
+service WalletService {
+  // Debit request to debit game balance
+  rpc Debit (DebitRequest) returns (DebitResponse);
+
+}
+
+// ---------------------------------------------------------------------------
+// Request / Response Payloads
+// ---------------------------------------------------------------------------
+
+message DebitRequest {
+  string TenantID = 1;
+  string ProfileID = 2;
+  string GameIdentifier = 3;
+  float Amount = 4;
+}
+
+message DebitResponse {
+  string status = 1;
+  string message = 2;
+}
