@@ -39,6 +39,7 @@ message DebitRequest {
 message DebitResponse {
   string status = 1;
   string message = 2;
+  float Amount = 3;
 }
 
 message CreditResponse {
