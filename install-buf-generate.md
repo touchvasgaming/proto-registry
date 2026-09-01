@@ -21,5 +21,5 @@ export PATH=$PATH:$(go env GOPATH)/bin
 buf generate proto
 git add --all && git commit -m "add betting, bonus, casino, jackpot,tax and wallet-provider services"
 git push origin master
-git tag v1.1.2 && git push origin v1.1.2
+git tag v1.1.4 && git push origin v1.1.4
 ```
