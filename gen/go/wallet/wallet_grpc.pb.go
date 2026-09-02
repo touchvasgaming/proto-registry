@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	WalletService_Debit_FullMethodName  = "/reward.WalletService/Debit"
-	WalletService_Credit_FullMethodName = "/reward.WalletService/Credit"
+	WalletService_Debit_FullMethodName     = "/reward.WalletService/Debit"
+	WalletService_Credit_FullMethodName    = "/reward.WalletService/Credit"
+	WalletService_GetPlayer_FullMethodName = "/reward.WalletService/GetPlayer"
 )
 
 // WalletServiceClient is the client API for WalletService service.
@@ -30,6 +31,7 @@ type WalletServiceClient interface {
 	// Debit request to debit game balance
 	Debit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*DebitResponse, error)
 	Credit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*CreditResponse, error)
+	GetPlayer(ctx context.Context, in *GetPlayerRequest, opts ...grpc.CallOption) (*GetPlayerResponse, error)
 }
 
 type walletServiceClient struct {
@@ -58,6 +60,15 @@ func (c *walletServiceClient) Credit(ctx context.Context, in *CreditRequest, opt
 	return out, nil
 }
 
+func (c *walletServiceClient) GetPlayer(ctx context.Context, in *GetPlayerRequest, opts ...grpc.CallOption) (*GetPlayerResponse, error) {
+	out := new(GetPlayerResponse)
+	err := c.cc.Invoke(ctx, WalletService_GetPlayer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServiceServer is the server API for WalletService service.
 // All implementations must embed UnimplementedWalletServiceServer
 // for forward compatibility
@@ -65,6 +76,7 @@ type WalletServiceServer interface {
 	// Debit request to debit game balance
 	Debit(context.Context, *DebitRequest) (*DebitResponse, error)
 	Credit(context.Context, *CreditRequest) (*CreditResponse, error)
+	GetPlayer(context.Context, *GetPlayerRequest) (*GetPlayerResponse, error)
 	mustEmbedUnimplementedWalletServiceServer()
 }
 
@@ -77,6 +89,9 @@ func (UnimplementedWalletServiceServer) Debit(context.Context, *DebitRequest) (*
 }
 func (UnimplementedWalletServiceServer) Credit(context.Context, *CreditRequest) (*CreditResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Credit not implemented")
+}
+func (UnimplementedWalletServiceServer) GetPlayer(context.Context, *GetPlayerRequest) (*GetPlayerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlayer not implemented")
 }
 func (UnimplementedWalletServiceServer) mustEmbedUnimplementedWalletServiceServer() {}
 
@@ -127,6 +142,24 @@ func _WalletService_Credit_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WalletService_GetPlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlayerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).GetPlayer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalletService_GetPlayer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).GetPlayer(ctx, req.(*GetPlayerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WalletService_ServiceDesc is the grpc.ServiceDesc for WalletService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -141,6 +174,10 @@ var WalletService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Credit",
 			Handler:    _WalletService_Credit_Handler,
+		},
+		{
+			MethodName: "GetPlayer",
+			Handler:    _WalletService_GetPlayer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

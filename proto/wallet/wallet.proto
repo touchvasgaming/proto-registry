@@ -22,6 +22,7 @@ service WalletService {
   // Debit request to debit game balance
   rpc Debit (DebitRequest) returns (DebitResponse);
   rpc Credit (CreditRequest) returns (CreditResponse);
+  rpc GetPlayer (GetPlayerRequest) returns (GetPlayerResponse);
 
 }
 
@@ -58,4 +59,13 @@ message CreditRequest {
   string ProfileID = 2;
   float Amount = 3;
   RewardType rewardType = 4;
+}
+
+message GetPlayerRequest {
+  string TenantID = 1;
+  string ProfileID = 2;
+}
+
+message GetPlayerResponse {
+  string Username = 1;
 }
