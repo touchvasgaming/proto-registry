@@ -61,6 +61,8 @@ message CreditRequest {
   string ProfileID = 2;
   float Amount = 3;
   RewardType rewardType = 4;
+  string SessionID = 5;
+
 }
 
 message GetPlayerRequest {
