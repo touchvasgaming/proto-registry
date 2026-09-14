@@ -35,6 +35,8 @@ message DebitRequest {
   string ProfileID = 2;
   string GameIdentifier = 3;
   float Amount = 4;
+  string SessionID = 5;
+
 }
 
 message DebitResponse {
