@@ -38,4 +38,5 @@ message PlayEvaluationResponse {
 
   // Reason provides optional context when allowed = false or a fallback paytable is forced.
   string reason = 4;
+  string resolved_campaign_id = 5;
 }
