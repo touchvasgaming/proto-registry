@@ -1,4 +1,4 @@
-module github.com/touchvasgaming/proto-registry/gen/go
+module github.com/touchvasgaming/proto-registry
 
 go 1.26.0
 

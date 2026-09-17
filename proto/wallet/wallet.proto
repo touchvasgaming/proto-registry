@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 // 1. Import the Well-Known Type
 import "google/protobuf/struct.proto";
 
-option go_package = "github.com/touchvasgaming/proto-registry/gen/go/wallet";
+option go_package = "github.com/touchvasgaming/proto-registry/wallet";
 
 enum RewardTypes {
   REWARD_TYPE_GAME = 0;

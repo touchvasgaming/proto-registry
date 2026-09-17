@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package campaign;
 
-option go_package = "github.com/touchvasgaming/proto-registry/gen/go/campaign";
+option go_package = "github.com/touchvasgaming/proto-registry/campaign";
 
 // CampaignExecutionService provides real-time, synchronous budget evaluations
 // required by the game engines before spinning the RNG.
