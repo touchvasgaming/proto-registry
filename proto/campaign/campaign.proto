@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package campaign;
+
+option go_package = "github.com/touchvasgaming/proto-registry/gen/go/campaign";
+
+// CampaignExecutionService provides real-time, synchronous budget evaluations
+// required by the game engines before spinning the RNG.
+service CampaignExecutionService {
+  // EvaluatePlay checks the player's limits and the campaign's global/daily budget
+  // to dictate the maximum allowable win and the active paytable.
+  rpc EvaluatePlay(PlayEvaluationRequest) returns (PlayEvaluationResponse);
+}
+
+// PlayEvaluationRequest contains the required context from the game engine
+// to identify the player and the target promotional budget.
+message PlayEvaluationRequest {
+  string tenant_id = 1;
+  string campaign_id = 2;
+  string game_id = 3;
+  string player_id = 4;
+}
+
+// PlayEvaluationResponse strictly dictates the financial constraints the RNG
+// must adhere to for this specific spin.
+message PlayEvaluationResponse {
+  // Allowed dictates if the player can participate at all.
+  // If false, the game engine must reject the spin.
+  bool allowed = 1;
+
+  // ActivePaytableId tells the game engine which mathematical probability model to use.
+  // Examples: "STANDARD", "CONSOLATION", "ZERO_CASH_FALLBACK"
+  string active_paytable_id = 2;
+
+  // MaxAllowedWin provides a hard numerical cap. The game engine's RNG must not
+  // select an outcome that exceeds this value, protecting the budget from race conditions.
+  double max_allowed_win = 3;
+
+  // Reason provides optional context when allowed = false or a fallback paytable is forced.
+  string reason = 4;
+}
