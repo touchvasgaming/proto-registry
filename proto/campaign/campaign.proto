@@ -21,22 +21,20 @@ message PlayEvaluationRequest {
   string player_id = 4;
 }
 
-// PlayEvaluationResponse strictly dictates the financial constraints the RNG
-// must adhere to for this specific spin.
-message PlayEvaluationResponse {
-  // Allowed dictates if the player can participate at all.
-  // If false, the game engine must reject the spin.
-  bool allowed = 1;
-
-  // ActivePaytableId tells the game engine which mathematical probability model to use.
-  // Examples: "STANDARD", "CONSOLATION", "ZERO_CASH_FALLBACK"
+// BudgetConstraint dictates the financial constraints for a specific reward type.
+message BudgetConstraint {
+  string reward_type = 1; // e.g., "cash", "bonus", "points"
   string active_paytable_id = 2;
-
-  // MaxAllowedWin provides a hard numerical cap. The game engine's RNG must not
-  // select an outcome that exceeds this value, protecting the budget from race conditions.
   double max_allowed_win = 3;
+}
 
-  // Reason provides optional context when allowed = false or a fallback paytable is forced.
-  string reason = 4;
-  string resolved_campaign_id = 5;
+// PlayEvaluationResponse strictly dictates the financial constraints the RNG
+// must adhere to for this specific spin across multiple reward types.
+message PlayEvaluationResponse {
+  bool allowed = 1;
+  string reason = 2;
+  string resolved_campaign_id = 3;
+
+  // Array of limits mapped to specific reward types
+  repeated BudgetConstraint budgets = 4;
 }
