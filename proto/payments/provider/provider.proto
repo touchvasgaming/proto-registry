@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package provider;
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/touchvasgaming/proto-registry/payments/provider";
+
+// ProviderService defines the downstream contract for interacting with external payment gateways.
+service ProviderService {
+  // Initiates an inbound payment collection (e.g., M-Pesa STK Push or Card Charge)
+  rpc RequestPayment(PaymentRequest) returns (ProviderResponse);
+
+  // Initiates an outbound disbursement (e.g., B2C Transfer)
+  rpc SendPayout(PayoutRequest) returns (ProviderResponse);
+
+  // Queries the latest status of a transaction directly from the provider gateway
+  rpc QueryStatus(StatusRequest) returns (ProviderResponse);
+}
+
+message PaymentRequest {
+  int64 amount = 1;
+  string currency = 2;
+  string target = 3; // The source of funds (e.g., phone number or card token)
+  // 2. Use the Struct type for your map[string]interface{}
+  google.protobuf.Struct metadata = 4;
+}
+
+message PayoutRequest {
+  int64 amount = 1;
+  string currency = 2;
+  string target = 3; // The destination for funds (e.g., bank account or phone number)
+  // 2. Use the Struct type for your map[string]interface{}
+  google.protobuf.Struct metadata = 4;
+}
+
+message StatusRequest {
+  string provider_tx_id = 1;
+  string TransacctionType = 2;
+  // 2. Use the Struct type for your map[string]interface{}
+  google.protobuf.Struct metadata = 3;
+
+}
+
+message ProviderResponse {
+  string provider_tx_id = 1;
+  string status = 2; // Represents ProviderStatus: "PENDING", "COMPLETED", or "FAILED"
+  string error_message = 3;
+  // 2. Use the Struct type for your map[string]interface{}
+  google.protobuf.Struct metadata = 4;
+}

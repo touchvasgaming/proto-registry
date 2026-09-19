@@ -6,7 +6,7 @@
 // - protoc             (unknown)
 // source: payments/core/core.proto
 
-package pbcore
+package core
 
 import (
 	context "context"
@@ -21,8 +21,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	CoreCallbackService_UpdateTransactionStatus_FullMethodName = "/core.v1.CoreCallbackService/UpdateTransactionStatus"
-	CoreCallbackService_ProcessExternalPayment_FullMethodName  = "/core.v1.CoreCallbackService/ProcessExternalPayment"
+	CoreCallbackService_UpdateTransactionStatus_FullMethodName = "/core.CoreCallbackService/UpdateTransactionStatus"
+	CoreCallbackService_ProcessExternalPayment_FullMethodName  = "/core.CoreCallbackService/ProcessExternalPayment"
 )
 
 // CoreCallbackServiceClient is the client API for CoreCallbackService service.
@@ -135,7 +135,7 @@ func _CoreCallbackService_ProcessExternalPayment_Handler(srv interface{}, ctx co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CoreCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "core.v1.CoreCallbackService",
+	ServiceName: "core.CoreCallbackService",
 	HandlerType: (*CoreCallbackServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

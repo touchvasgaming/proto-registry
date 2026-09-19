@@ -1,8 +1,9 @@
 // protobuf/core/v1/callback.proto
 syntax = "proto3";
-package core.v1;
+package core;
+import "google/protobuf/struct.proto";
 
-option go_package = "github.com/touchvas/payments/pkg/pb/core/v1;pbcore";
+option go_package = "github.com/touchvasgaming/proto-registry/payments/core";
 
 service CoreCallbackService {
   // Used for async updates to existing transactions (Payouts, STK Push)
@@ -17,6 +18,8 @@ message UpdateStatusRequest {
   string provider_tx_id = 2;
   string status = 3; // "PENDING", "COMPLETED", "FAILED"
   string failure_reason = 4;
+  // 2. Use the Struct type for your map[string]interface{}
+  google.protobuf.Struct metadata = 5;
 }
 
 message ExternalPaymentRequest {
@@ -26,7 +29,8 @@ message ExternalPaymentRequest {
   int64 amount = 4;
   string currency = 5;
   string source = 6;
-  map<string, string> metadata = 7;
+  // 2. Use the Struct type for your map[string]interface{}
+  google.protobuf.Struct metadata = 7;
 }
 
 message CallbackResponse {
