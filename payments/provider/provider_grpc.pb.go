@@ -22,6 +22,10 @@ const (
 	ProviderService_RequestPayment_FullMethodName = "/provider.ProviderService/RequestPayment"
 	ProviderService_SendPayout_FullMethodName     = "/provider.ProviderService/SendPayout"
 	ProviderService_QueryStatus_FullMethodName    = "/provider.ProviderService/QueryStatus"
+	ProviderService_SetConfig_FullMethodName      = "/provider.ProviderService/SetConfig"
+	ProviderService_GetConfig_FullMethodName      = "/provider.ProviderService/GetConfig"
+	ProviderService_UpdateConfig_FullMethodName   = "/provider.ProviderService/UpdateConfig"
+	ProviderService_DeleteConfig_FullMethodName   = "/provider.ProviderService/DeleteConfig"
 )
 
 // ProviderServiceClient is the client API for ProviderService service.
@@ -34,6 +38,11 @@ type ProviderServiceClient interface {
 	SendPayout(ctx context.Context, in *PayoutRequest, opts ...grpc.CallOption) (*ProviderResponse, error)
 	// Queries the latest status of a transaction directly from the provider gateway
 	QueryStatus(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*ProviderResponse, error)
+	// Configuration Management RPCs
+	SetConfig(ctx context.Context, in *ConfigRequest, opts ...grpc.CallOption) (*ConfigResponse, error)
+	GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*ConfigResponse, error)
+	UpdateConfig(ctx context.Context, in *ConfigRequest, opts ...grpc.CallOption) (*ConfigResponse, error)
+	DeleteConfig(ctx context.Context, in *DeleteConfigRequest, opts ...grpc.CallOption) (*ConfigResponse, error)
 }
 
 type providerServiceClient struct {
@@ -71,6 +80,42 @@ func (c *providerServiceClient) QueryStatus(ctx context.Context, in *StatusReque
 	return out, nil
 }
 
+func (c *providerServiceClient) SetConfig(ctx context.Context, in *ConfigRequest, opts ...grpc.CallOption) (*ConfigResponse, error) {
+	out := new(ConfigResponse)
+	err := c.cc.Invoke(ctx, ProviderService_SetConfig_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *providerServiceClient) GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*ConfigResponse, error) {
+	out := new(ConfigResponse)
+	err := c.cc.Invoke(ctx, ProviderService_GetConfig_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *providerServiceClient) UpdateConfig(ctx context.Context, in *ConfigRequest, opts ...grpc.CallOption) (*ConfigResponse, error) {
+	out := new(ConfigResponse)
+	err := c.cc.Invoke(ctx, ProviderService_UpdateConfig_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *providerServiceClient) DeleteConfig(ctx context.Context, in *DeleteConfigRequest, opts ...grpc.CallOption) (*ConfigResponse, error) {
+	out := new(ConfigResponse)
+	err := c.cc.Invoke(ctx, ProviderService_DeleteConfig_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProviderServiceServer is the server API for ProviderService service.
 // All implementations must embed UnimplementedProviderServiceServer
 // for forward compatibility
@@ -81,6 +126,11 @@ type ProviderServiceServer interface {
 	SendPayout(context.Context, *PayoutRequest) (*ProviderResponse, error)
 	// Queries the latest status of a transaction directly from the provider gateway
 	QueryStatus(context.Context, *StatusRequest) (*ProviderResponse, error)
+	// Configuration Management RPCs
+	SetConfig(context.Context, *ConfigRequest) (*ConfigResponse, error)
+	GetConfig(context.Context, *GetConfigRequest) (*ConfigResponse, error)
+	UpdateConfig(context.Context, *ConfigRequest) (*ConfigResponse, error)
+	DeleteConfig(context.Context, *DeleteConfigRequest) (*ConfigResponse, error)
 	mustEmbedUnimplementedProviderServiceServer()
 }
 
@@ -96,6 +146,18 @@ func (UnimplementedProviderServiceServer) SendPayout(context.Context, *PayoutReq
 }
 func (UnimplementedProviderServiceServer) QueryStatus(context.Context, *StatusRequest) (*ProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryStatus not implemented")
+}
+func (UnimplementedProviderServiceServer) SetConfig(context.Context, *ConfigRequest) (*ConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetConfig not implemented")
+}
+func (UnimplementedProviderServiceServer) GetConfig(context.Context, *GetConfigRequest) (*ConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConfig not implemented")
+}
+func (UnimplementedProviderServiceServer) UpdateConfig(context.Context, *ConfigRequest) (*ConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateConfig not implemented")
+}
+func (UnimplementedProviderServiceServer) DeleteConfig(context.Context, *DeleteConfigRequest) (*ConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteConfig not implemented")
 }
 func (UnimplementedProviderServiceServer) mustEmbedUnimplementedProviderServiceServer() {}
 
@@ -164,6 +226,78 @@ func _ProviderService_QueryStatus_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProviderService_SetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProviderServiceServer).SetConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProviderService_SetConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProviderServiceServer).SetConfig(ctx, req.(*ConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProviderService_GetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProviderServiceServer).GetConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProviderService_GetConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProviderServiceServer).GetConfig(ctx, req.(*GetConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProviderService_UpdateConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProviderServiceServer).UpdateConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProviderService_UpdateConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProviderServiceServer).UpdateConfig(ctx, req.(*ConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProviderService_DeleteConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProviderServiceServer).DeleteConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProviderService_DeleteConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProviderServiceServer).DeleteConfig(ctx, req.(*DeleteConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProviderService_ServiceDesc is the grpc.ServiceDesc for ProviderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -182,6 +316,22 @@ var ProviderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryStatus",
 			Handler:    _ProviderService_QueryStatus_Handler,
+		},
+		{
+			MethodName: "SetConfig",
+			Handler:    _ProviderService_SetConfig_Handler,
+		},
+		{
+			MethodName: "GetConfig",
+			Handler:    _ProviderService_GetConfig_Handler,
+		},
+		{
+			MethodName: "UpdateConfig",
+			Handler:    _ProviderService_UpdateConfig_Handler,
+		},
+		{
+			MethodName: "DeleteConfig",
+			Handler:    _ProviderService_DeleteConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

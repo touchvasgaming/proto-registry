@@ -15,6 +15,12 @@ service ProviderService {
 
   // Queries the latest status of a transaction directly from the provider gateway
   rpc QueryStatus(StatusRequest) returns (ProviderResponse);
+
+  // Configuration Management RPCs
+  rpc SetConfig(ConfigRequest) returns (ConfigResponse);
+  rpc GetConfig(GetConfigRequest) returns (ConfigResponse);
+  rpc UpdateConfig(ConfigRequest) returns (ConfigResponse);
+  rpc DeleteConfig(DeleteConfigRequest) returns (ConfigResponse);
 }
 
 message PaymentRequest {
@@ -47,4 +53,27 @@ message ProviderResponse {
   string error_message = 3;
   // 2. Use the Struct type for your map[string]interface{}
   google.protobuf.Struct metadata = 4;
+}
+
+// ==========================================
+// Configuration Messages
+// ==========================================
+
+message ConfigRequest {
+  string tenant_id = 1; // Identifier for the merchant/tenant
+  google.protobuf.Struct metadata = 2; // The configuration payload (map[string]any)
+}
+
+message GetConfigRequest {
+  string tenant_id = 1;
+}
+
+message DeleteConfigRequest {
+  string tenant_id = 1;
+}
+
+message ConfigResponse {
+  bool success = 1;
+  string message = 2;
+  google.protobuf.Struct metadata = 3; // Returns the active configuration payload
 }
