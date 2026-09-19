@@ -1,0 +1,35 @@
+// protobuf/core/v1/callback.proto
+syntax = "proto3";
+package core.v1;
+
+option go_package = "github.com/touchvas/payments/pkg/pb/core/v1;pbcore";
+
+service CoreCallbackService {
+  // Used for async updates to existing transactions (Payouts, STK Push)
+  rpc UpdateTransactionStatus(UpdateStatusRequest) returns (CallbackResponse);
+
+  // Used for unprompted externally initiated payments (Lipa na M-Pesa C2B)
+  rpc ProcessExternalPayment(ExternalPaymentRequest) returns (CallbackResponse);
+}
+
+message UpdateStatusRequest {
+  string internal_tx_id = 1;
+  string provider_tx_id = 2;
+  string status = 3; // "PENDING", "COMPLETED", "FAILED"
+  string failure_reason = 4;
+}
+
+message ExternalPaymentRequest {
+  string tenant_id = 1;
+  string provider_tx_id = 2;
+  string provider = 3;
+  int64 amount = 4;
+  string currency = 5;
+  string source = 6;
+  map<string, string> metadata = 7;
+}
+
+message CallbackResponse {
+  bool success = 1;
+  string message = 2;
+}
