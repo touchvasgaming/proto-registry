@@ -30,6 +30,7 @@ message PaymentRequest {
   string tenantID =4;
   // 2. Use the Struct type for your map[string]interface{}
   google.protobuf.Struct metadata = 5;
+  int64 id =6;
 }
 
 message PayoutRequest {
@@ -39,6 +40,7 @@ message PayoutRequest {
   string tenantID =4;
   // 2. Use the Struct type for your map[string]interface{}
   google.protobuf.Struct metadata = 5;
+  int64 id=6;
 }
 
 message StatusRequest {
@@ -47,7 +49,7 @@ message StatusRequest {
   string tenantID =3;
   // 2. Use the Struct type for your map[string]interface{}
   google.protobuf.Struct metadata = 4;
-
+int64 id=7;
 }
 
 message ProviderResponse {
