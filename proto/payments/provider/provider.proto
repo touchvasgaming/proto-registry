@@ -27,23 +27,26 @@ message PaymentRequest {
   int64 amount = 1;
   string currency = 2;
   string target = 3; // The source of funds (e.g., phone number or card token)
+  string tenantID =4;
   // 2. Use the Struct type for your map[string]interface{}
-  google.protobuf.Struct metadata = 4;
+  google.protobuf.Struct metadata = 5;
 }
 
 message PayoutRequest {
   int64 amount = 1;
   string currency = 2;
   string target = 3; // The destination for funds (e.g., bank account or phone number)
+  string tenantID =4;
   // 2. Use the Struct type for your map[string]interface{}
-  google.protobuf.Struct metadata = 4;
+  google.protobuf.Struct metadata = 5;
 }
 
 message StatusRequest {
   string provider_tx_id = 1;
-  string TransacctionType = 2;
+  string TransactionType = 2;
+  string tenantID =3;
   // 2. Use the Struct type for your map[string]interface{}
-  google.protobuf.Struct metadata = 3;
+  google.protobuf.Struct metadata = 4;
 
 }
 
