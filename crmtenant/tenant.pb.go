@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: crm-tenant/tenant.proto
+// source: crmtenant/tenant.proto
 
 package crmtenants
 
@@ -31,7 +31,7 @@ type IntegrationRequest struct {
 
 func (x *IntegrationRequest) Reset() {
 	*x = IntegrationRequest{}
-	mi := &file_crm_tenant_tenant_proto_msgTypes[0]
+	mi := &file_crmtenant_tenant_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *IntegrationRequest) String() string {
 func (*IntegrationRequest) ProtoMessage() {}
 
 func (x *IntegrationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_tenant_tenant_proto_msgTypes[0]
+	mi := &file_crmtenant_tenant_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *IntegrationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntegrationRequest.ProtoReflect.Descriptor instead.
 func (*IntegrationRequest) Descriptor() ([]byte, []int) {
-	return file_crm_tenant_tenant_proto_rawDescGZIP(), []int{0}
+	return file_crmtenant_tenant_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *IntegrationRequest) GetTenantID() string {
@@ -76,7 +76,7 @@ type IntegrationResponse struct {
 
 func (x *IntegrationResponse) Reset() {
 	*x = IntegrationResponse{}
-	mi := &file_crm_tenant_tenant_proto_msgTypes[1]
+	mi := &file_crmtenant_tenant_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +88,7 @@ func (x *IntegrationResponse) String() string {
 func (*IntegrationResponse) ProtoMessage() {}
 
 func (x *IntegrationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_crm_tenant_tenant_proto_msgTypes[1]
+	mi := &file_crmtenant_tenant_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,7 +101,7 @@ func (x *IntegrationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntegrationResponse.ProtoReflect.Descriptor instead.
 func (*IntegrationResponse) Descriptor() ([]byte, []int) {
-	return file_crm_tenant_tenant_proto_rawDescGZIP(), []int{1}
+	return file_crmtenant_tenant_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *IntegrationResponse) GetBaseURL() string {
@@ -118,11 +118,11 @@ func (x *IntegrationResponse) GetAPIKey() string {
 	return ""
 }
 
-var File_crm_tenant_tenant_proto protoreflect.FileDescriptor
+var File_crmtenant_tenant_proto protoreflect.FileDescriptor
 
-const file_crm_tenant_tenant_proto_rawDesc = "" +
+const file_crmtenant_tenant_proto_rawDesc = "" +
 	"\n" +
-	"\x17crm-tenant/tenant.proto\x12\n" +
+	"\x16crmtenant/tenant.proto\x12\n" +
 	"crmtenants\x1a\x1cgoogle/protobuf/struct.proto\"0\n" +
 	"\x12IntegrationRequest\x12\x1a\n" +
 	"\bTenantID\x18\x01 \x01(\tR\bTenantID\"G\n" +
@@ -133,23 +133,23 @@ const file_crm_tenant_tenant_proto_rawDesc = "" +
 	"\x0eGetIntegration\x12\x1e.crmtenants.IntegrationRequest\x1a\x1f.crmtenants.IntegrationResponseB5Z3github.com/touchvasgaming/proto-registry/crmtenantsb\x06proto3"
 
 var (
-	file_crm_tenant_tenant_proto_rawDescOnce sync.Once
-	file_crm_tenant_tenant_proto_rawDescData []byte
+	file_crmtenant_tenant_proto_rawDescOnce sync.Once
+	file_crmtenant_tenant_proto_rawDescData []byte
 )
 
-func file_crm_tenant_tenant_proto_rawDescGZIP() []byte {
-	file_crm_tenant_tenant_proto_rawDescOnce.Do(func() {
-		file_crm_tenant_tenant_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_crm_tenant_tenant_proto_rawDesc), len(file_crm_tenant_tenant_proto_rawDesc)))
+func file_crmtenant_tenant_proto_rawDescGZIP() []byte {
+	file_crmtenant_tenant_proto_rawDescOnce.Do(func() {
+		file_crmtenant_tenant_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_crmtenant_tenant_proto_rawDesc), len(file_crmtenant_tenant_proto_rawDesc)))
 	})
-	return file_crm_tenant_tenant_proto_rawDescData
+	return file_crmtenant_tenant_proto_rawDescData
 }
 
-var file_crm_tenant_tenant_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_crm_tenant_tenant_proto_goTypes = []any{
+var file_crmtenant_tenant_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_crmtenant_tenant_proto_goTypes = []any{
 	(*IntegrationRequest)(nil),  // 0: crmtenants.IntegrationRequest
 	(*IntegrationResponse)(nil), // 1: crmtenants.IntegrationResponse
 }
-var file_crm_tenant_tenant_proto_depIdxs = []int32{
+var file_crmtenant_tenant_proto_depIdxs = []int32{
 	0, // 0: crmtenants.CRMTenantService.GetIntegration:input_type -> crmtenants.IntegrationRequest
 	1, // 1: crmtenants.CRMTenantService.GetIntegration:output_type -> crmtenants.IntegrationResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -159,26 +159,26 @@ var file_crm_tenant_tenant_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_crm_tenant_tenant_proto_init() }
-func file_crm_tenant_tenant_proto_init() {
-	if File_crm_tenant_tenant_proto != nil {
+func init() { file_crmtenant_tenant_proto_init() }
+func file_crmtenant_tenant_proto_init() {
+	if File_crmtenant_tenant_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_crm_tenant_tenant_proto_rawDesc), len(file_crm_tenant_tenant_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_crmtenant_tenant_proto_rawDesc), len(file_crmtenant_tenant_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_crm_tenant_tenant_proto_goTypes,
-		DependencyIndexes: file_crm_tenant_tenant_proto_depIdxs,
-		MessageInfos:      file_crm_tenant_tenant_proto_msgTypes,
+		GoTypes:           file_crmtenant_tenant_proto_goTypes,
+		DependencyIndexes: file_crmtenant_tenant_proto_depIdxs,
+		MessageInfos:      file_crmtenant_tenant_proto_msgTypes,
 	}.Build()
-	File_crm_tenant_tenant_proto = out.File
-	file_crm_tenant_tenant_proto_goTypes = nil
-	file_crm_tenant_tenant_proto_depIdxs = nil
+	File_crmtenant_tenant_proto = out.File
+	file_crmtenant_tenant_proto_goTypes = nil
+	file_crmtenant_tenant_proto_depIdxs = nil
 }
