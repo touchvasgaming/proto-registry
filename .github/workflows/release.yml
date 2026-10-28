@@ -1,0 +1,24 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on any tag starting with 'v' (e.g., v1.4.0)
+
+permissions:
+  contents: write # Grants the GITHUB_TOKEN permission to create releases
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --title "${{ github.ref_name }}" \
+            --generate-notes
