@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package crmtenants;
+
+// 1. Import the Well-Known Type
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/touchvasgaming/proto-registry/crmtenants";
+
+service CRMTenantService {
+
+  rpc GetIntegration (IntegrationRequest) returns (IntegrationResponse);
+
+}
+
+// ---------------------------------------------------------------------------
+// Request / Response Payloads
+// ---------------------------------------------------------------------------
+
+message IntegrationRequest {
+  string TenantID = 1;
+
+}
+
+message IntegrationResponse {
+  string BaseURL = 1;
+  string APIKey = 2;
+}
