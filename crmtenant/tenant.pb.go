@@ -23,10 +23,11 @@ const (
 )
 
 type IntegrationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantID      string                 `protobuf:"bytes,1,opt,name=TenantID,proto3" json:"TenantID,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TenantID        string                 `protobuf:"bytes,1,opt,name=TenantID,proto3" json:"TenantID,omitempty"`
+	DefaultCurrency string                 `protobuf:"bytes,2,opt,name=DefaultCurrency,proto3" json:"DefaultCurrency,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *IntegrationRequest) Reset() {
@@ -62,6 +63,13 @@ func (*IntegrationRequest) Descriptor() ([]byte, []int) {
 func (x *IntegrationRequest) GetTenantID() string {
 	if x != nil {
 		return x.TenantID
+	}
+	return ""
+}
+
+func (x *IntegrationRequest) GetDefaultCurrency() string {
+	if x != nil {
+		return x.DefaultCurrency
 	}
 	return ""
 }
@@ -175,9 +183,10 @@ var File_crmtenant_tenant_proto protoreflect.FileDescriptor
 const file_crmtenant_tenant_proto_rawDesc = "" +
 	"\n" +
 	"\x16crmtenant/tenant.proto\x12\n" +
-	"crmtenants\x1a\x1cgoogle/protobuf/struct.proto\"0\n" +
+	"crmtenants\x1a\x1cgoogle/protobuf/struct.proto\"Z\n" +
 	"\x12IntegrationRequest\x12\x1a\n" +
-	"\bTenantID\x18\x01 \x01(\tR\bTenantID\"G\n" +
+	"\bTenantID\x18\x01 \x01(\tR\bTenantID\x12(\n" +
+	"\x0fDefaultCurrency\x18\x02 \x01(\tR\x0fDefaultCurrency\"G\n" +
 	"\x13IntegrationResponse\x12\x18\n" +
 	"\aBaseURL\x18\x01 \x01(\tR\aBaseURL\x12\x16\n" +
 	"\x06APIKey\x18\x02 \x01(\tR\x06APIKey\"I\n" +

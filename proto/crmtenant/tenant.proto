@@ -20,7 +20,7 @@ service CRMTenantService {
 
 message IntegrationRequest {
   string TenantID = 1;
-
+  string DefaultCurrency = 2;
 }
 
 message IntegrationResponse {
