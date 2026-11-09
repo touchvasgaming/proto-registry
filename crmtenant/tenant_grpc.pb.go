@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	CRMTenantService_GetIntegration_FullMethodName = "/crmtenants.CRMTenantService/GetIntegration"
+	CRMTenantService_SetupTenant_FullMethodName    = "/crmtenants.CRMTenantService/SetupTenant"
 )
 
 // CRMTenantServiceClient is the client API for CRMTenantService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CRMTenantServiceClient interface {
 	GetIntegration(ctx context.Context, in *IntegrationRequest, opts ...grpc.CallOption) (*IntegrationResponse, error)
+	SetupTenant(ctx context.Context, in *IntegrationRequest, opts ...grpc.CallOption) (*SetupTenantResponse, error)
 }
 
 type cRMTenantServiceClient struct {
@@ -47,11 +49,22 @@ func (c *cRMTenantServiceClient) GetIntegration(ctx context.Context, in *Integra
 	return out, nil
 }
 
+func (c *cRMTenantServiceClient) SetupTenant(ctx context.Context, in *IntegrationRequest, opts ...grpc.CallOption) (*SetupTenantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetupTenantResponse)
+	err := c.cc.Invoke(ctx, CRMTenantService_SetupTenant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CRMTenantServiceServer is the server API for CRMTenantService service.
 // All implementations must embed UnimplementedCRMTenantServiceServer
 // for forward compatibility.
 type CRMTenantServiceServer interface {
 	GetIntegration(context.Context, *IntegrationRequest) (*IntegrationResponse, error)
+	SetupTenant(context.Context, *IntegrationRequest) (*SetupTenantResponse, error)
 	mustEmbedUnimplementedCRMTenantServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedCRMTenantServiceServer struct{}
 
 func (UnimplementedCRMTenantServiceServer) GetIntegration(context.Context, *IntegrationRequest) (*IntegrationResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetIntegration not implemented")
+}
+func (UnimplementedCRMTenantServiceServer) SetupTenant(context.Context, *IntegrationRequest) (*SetupTenantResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetupTenant not implemented")
 }
 func (UnimplementedCRMTenantServiceServer) mustEmbedUnimplementedCRMTenantServiceServer() {}
 func (UnimplementedCRMTenantServiceServer) testEmbeddedByValue()                          {}
@@ -104,6 +120,24 @@ func _CRMTenantService_GetIntegration_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CRMTenantService_SetupTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IntegrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CRMTenantServiceServer).SetupTenant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CRMTenantService_SetupTenant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CRMTenantServiceServer).SetupTenant(ctx, req.(*IntegrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CRMTenantService_ServiceDesc is the grpc.ServiceDesc for CRMTenantService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var CRMTenantService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetIntegration",
 			Handler:    _CRMTenantService_GetIntegration_Handler,
+		},
+		{
+			MethodName: "SetupTenant",
+			Handler:    _CRMTenantService_SetupTenant_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

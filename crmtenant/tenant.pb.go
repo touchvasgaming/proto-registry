@@ -118,6 +118,58 @@ func (x *IntegrationResponse) GetAPIKey() string {
 	return ""
 }
 
+type SetupTenantResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetupTenantResponse) Reset() {
+	*x = SetupTenantResponse{}
+	mi := &file_crmtenant_tenant_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetupTenantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetupTenantResponse) ProtoMessage() {}
+
+func (x *SetupTenantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_crmtenant_tenant_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetupTenantResponse.ProtoReflect.Descriptor instead.
+func (*SetupTenantResponse) Descriptor() ([]byte, []int) {
+	return file_crmtenant_tenant_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SetupTenantResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *SetupTenantResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_crmtenant_tenant_proto protoreflect.FileDescriptor
 
 const file_crmtenant_tenant_proto_rawDesc = "" +
@@ -128,9 +180,13 @@ const file_crmtenant_tenant_proto_rawDesc = "" +
 	"\bTenantID\x18\x01 \x01(\tR\bTenantID\"G\n" +
 	"\x13IntegrationResponse\x12\x18\n" +
 	"\aBaseURL\x18\x01 \x01(\tR\aBaseURL\x12\x16\n" +
-	"\x06APIKey\x18\x02 \x01(\tR\x06APIKey2e\n" +
+	"\x06APIKey\x18\x02 \x01(\tR\x06APIKey\"I\n" +
+	"\x13SetupTenantResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xb5\x01\n" +
 	"\x10CRMTenantService\x12Q\n" +
-	"\x0eGetIntegration\x12\x1e.crmtenants.IntegrationRequest\x1a\x1f.crmtenants.IntegrationResponseB5Z3github.com/touchvasgaming/proto-registry/crmtenantsb\x06proto3"
+	"\x0eGetIntegration\x12\x1e.crmtenants.IntegrationRequest\x1a\x1f.crmtenants.IntegrationResponse\x12N\n" +
+	"\vSetupTenant\x12\x1e.crmtenants.IntegrationRequest\x1a\x1f.crmtenants.SetupTenantResponseB5Z3github.com/touchvasgaming/proto-registry/crmtenantsb\x06proto3"
 
 var (
 	file_crmtenant_tenant_proto_rawDescOnce sync.Once
@@ -144,16 +200,19 @@ func file_crmtenant_tenant_proto_rawDescGZIP() []byte {
 	return file_crmtenant_tenant_proto_rawDescData
 }
 
-var file_crmtenant_tenant_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_crmtenant_tenant_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_crmtenant_tenant_proto_goTypes = []any{
 	(*IntegrationRequest)(nil),  // 0: crmtenants.IntegrationRequest
 	(*IntegrationResponse)(nil), // 1: crmtenants.IntegrationResponse
+	(*SetupTenantResponse)(nil), // 2: crmtenants.SetupTenantResponse
 }
 var file_crmtenant_tenant_proto_depIdxs = []int32{
 	0, // 0: crmtenants.CRMTenantService.GetIntegration:input_type -> crmtenants.IntegrationRequest
-	1, // 1: crmtenants.CRMTenantService.GetIntegration:output_type -> crmtenants.IntegrationResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 1: crmtenants.CRMTenantService.SetupTenant:input_type -> crmtenants.IntegrationRequest
+	1, // 2: crmtenants.CRMTenantService.GetIntegration:output_type -> crmtenants.IntegrationResponse
+	2, // 3: crmtenants.CRMTenantService.SetupTenant:output_type -> crmtenants.SetupTenantResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -170,7 +229,7 @@ func file_crmtenant_tenant_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_crmtenant_tenant_proto_rawDesc), len(file_crmtenant_tenant_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

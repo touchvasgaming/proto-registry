@@ -10,6 +10,7 @@ option go_package = "github.com/touchvasgaming/proto-registry/crmtenants";
 service CRMTenantService {
 
   rpc GetIntegration (IntegrationRequest) returns (IntegrationResponse);
+  rpc SetupTenant (IntegrationRequest) returns (SetupTenantResponse);
 
 }
 
@@ -25,4 +26,9 @@ message IntegrationRequest {
 message IntegrationResponse {
   string BaseURL = 1;
   string APIKey = 2;
+}
+
+message SetupTenantResponse {
+  bool success = 1;
+  string message = 2;
 }
