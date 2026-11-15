@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             (unknown)
-// source: crmtenant/tenant.proto
+// source: crmtenant/notification.proto
 
 package crmtenants
 
@@ -155,5 +155,5 @@ var CRMTenantService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "crmtenant/tenant.proto",
+	Metadata: "crmtenant/notification.proto",
 }
