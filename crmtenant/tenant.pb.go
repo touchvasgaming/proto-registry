@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: crmtenant/notification.proto
+// source: crmtenant/tenant.proto
 
 package crmtenants
 
@@ -182,7 +182,7 @@ var File_crmtenant_tenant_proto protoreflect.FileDescriptor
 
 const file_crmtenant_tenant_proto_rawDesc = "" +
 	"\n" +
-	"\x16crmtenant/notification.proto\x12\n" +
+	"\x16crmtenant/tenant.proto\x12\n" +
 	"crmtenants\x1a\x1cgoogle/protobuf/struct.proto\"Z\n" +
 	"\x12IntegrationRequest\x12\x1a\n" +
 	"\bTenantID\x18\x01 \x01(\tR\bTenantID\x12(\n" +
