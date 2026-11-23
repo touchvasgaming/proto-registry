@@ -12,7 +12,7 @@ message SendNotificationRequest{
   string recipients = 1;
   string content =2;
   string id =3;
-
+  string tenantID =4;
 }
 message sendNotificationResponse {
   string status =1;
