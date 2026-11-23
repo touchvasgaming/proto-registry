@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package core;
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/touchvasgaming/proto-registry/notification/core";
+
+service NotificationCore{
+  rpc DLR(DLRRequest)returns (DLRResponse ){}
+}
+message DLRRequest{
+  string id = 1;
+  string status=2;
+}
+message DLRResponse {
+  int64 status =1;
+
+}

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package provider;
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/touchvasgaming/proto-registry/notification/provider";
+
+service NotificationProvider{
+  rpc SendNotification(SendNotificationRequest)returns (sendNotificationResponse){}
+}
+message SendNotificationRequest{
+  string recipients = 1;
+  string content =2;
+  string id =3;
+
+}
+message sendNotificationResponse {
+  string status =1;
+  string description =2;
+  string transactionID =3;
+}
+
