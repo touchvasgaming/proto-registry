@@ -15,6 +15,7 @@
   - **Payment:** `option go_package = "github.com/your-org/proto-registry/gen/go/payment";`
   - **Wallet:** `option go_package = "github.com/your-org/proto-registry/gen/go/wallet";`
 
+
 # How to use in other services
 ## Import in Microservices
 Now, your microservices don't need the .proto files at all. They simply import the generated Go package via go get:

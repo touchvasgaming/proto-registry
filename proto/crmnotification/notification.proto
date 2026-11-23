@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package crmnotification;
+
+// 1. Import the Well-Known Type
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/touchvasgaming/proto-registry/crmnotification";
+
+service CRMNotificationService {
+
+  rpc SendNotification (NotificationRequest) returns (NotificationResponse);
+
+}
+
+// ---------------------------------------------------------------------------
+// Request / Response Payloads
+// ---------------------------------------------------------------------------
+
+message NotificationRequest {
+  string TenantID = 1;
+  string ProfileID = 2;
+  string TemplateID = 3;
+}
+
+message NotificationResponse {
+  bool success = 1;
+  string message = 2;
+}
