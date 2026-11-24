@@ -11,6 +11,7 @@ service NotificationCore{
 message DLRRequest{
   string id = 1;
   string status=2;
+  string description=3;
 }
 message DLRResponse {
   int64 status =1;
